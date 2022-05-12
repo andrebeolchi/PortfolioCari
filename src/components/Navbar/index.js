@@ -4,9 +4,7 @@ import { animateScroll as scroll } from 'react-scroll';
 import { Colors } from '../colors';
 import {
     BurgerBar, MobileIcon, Nav,
-    NavbarContainer, NavBtn,
-    NavBtnLink,
-    NavFileDownload, NavItem,
+    NavbarContainer, NavBtn, NavBtnLink, NavFileDownload, NavItem,
     NavLinks, NavLogo, NavMenu, NavPageLinks
 } from './NavbarElement';
 
@@ -73,7 +71,7 @@ const Navbar = ({ toggle }) => {
                             </NavItem>
                         </NavMenu>
                         <NavBtn>
-                            <NavBtnLink href="https://drive.google.com/uc?id=1_mdMYc3_W8jrBj7JkT_AqVpIdofuSjZl&export=download" download>
+                            <NavBtnLink href="#">
                                 <NavFileDownload
                                     style={{
                                         color: Colors.darkBlack,

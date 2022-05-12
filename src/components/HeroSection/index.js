@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import Video from '../../assets/backgroundVideo.mp4';
 import { AButton } from '../ButtonElement';
 import {
     ArrowForward,
-    ArrowRight, HeroBtnWrapper, HeroContainer,
+    ArrowRight, HeroBg, HeroBtnWrapper, HeroContainer,
     HeroContent, HeroH1,
-    HeroP
+    HeroP,
+    VideoBg
 } from './HeroElement';
 
 const HeroSection = () => {
@@ -16,12 +18,13 @@ const HeroSection = () => {
 
     return (
         <HeroContainer id="home">
-            {/* <HeroBg>
+            <HeroBg>
                 <VideoBg autoPlay loop muted src={Video} type='data/mp4' disablePictureInPicture />
-            </HeroBg> */}
+            </HeroBg>
             <HeroContent>
                 <HeroH1>Carina Ciasca Pizzo</HeroH1>
-                <HeroP>“Lion whistle whole older previous harder been bank six talk voyage practical progress dust since nervous signal string system weather”</HeroP>
+                <HeroP>Raspe para ver a minha biografia</HeroP>
+                <HeroP>{"▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒\n▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒\n▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒"}</HeroP>
                 <HeroBtnWrapper>
                     <AButton to="/contato" 
                             onMouseEnter={onHover}

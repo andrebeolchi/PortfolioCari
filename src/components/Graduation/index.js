@@ -1,5 +1,5 @@
 import React from 'react'
-import AnhembiLogo from '../../images/black_anhembi.png'
+import AnhembiLogo from '../../assets/black_anhembi.png'
 import {
     GraduationCard, GraduationContainer, GraduationH1,
     GraduationH2, GraduationIcon, GraduationP, GraduationWrapper
