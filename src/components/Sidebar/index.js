@@ -1,15 +1,6 @@
 import React from 'react'
 import {
-    SidebarContainer,
-    Icon,
-    CloseIcon,
-    SidebarWrapper,
-    SidebarMenu,
-    SidebarLink,
-    SideBtnWrap,
-    SidebarBtnLink,
-    DownloadIcon,
-    SidebarPageLink
+    CloseIcon, DownloadIcon, Icon, SidebarBtnLink, SidebarContainer, SidebarLink, SidebarMenu, SidebarPageLink, SidebarWrapper, SideBtnWrap
 } from './SidebarElements'
 
 
@@ -26,7 +17,8 @@ const Sidebar = ({isOpen, toggle}) => {
                     <SidebarPageLink to="/contato" onClick={toggle}>Contato</SidebarPageLink>
                 </SidebarMenu>
                 <SideBtnWrap>
-                    <SidebarBtnLink href='https://drive.google.com/uc?id=1_mdMYc3_W8jrBj7JkT_AqVpIdofuSjZl&export=download' download><DownloadIcon />Currículo</SidebarBtnLink>
+                    <SidebarBtnLink href='#'><DownloadIcon />Currículo</SidebarBtnLink>
+                    {/* <SidebarBtnLink href='https://drive.google.com/uc?id=1_mdMYc3_W8jrBj7JkT_AqVpIdofuSjZl&export=download' download><DownloadIcon />Currículo</SidebarBtnLink> */}
                 </SideBtnWrap>
             </SidebarWrapper>
         </SidebarContainer>

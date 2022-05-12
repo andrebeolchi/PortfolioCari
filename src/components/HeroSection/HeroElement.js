@@ -1,5 +1,5 @@
+import { MdArrowForward, MdKeyboardArrowRight } from 'react-icons/md'
 import styled from 'styled-components'
-import {MdArrowForward, MdKeyboardArrowRight} from 'react-icons/md'
 import { Colors } from '../colors'
 
 export const HeroContainer = styled.div`
@@ -19,8 +19,8 @@ export const HeroContainer = styled.div`
         bottom: 0;
         left: 0;
         right: 0;
-        background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%), 
-                    linear-gradient(180deg, rgba(0,0,0,0.2) 0%, transparent 100%);
+        background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.8) 100%), 
+                    linear-gradient(180deg, rgba(0,0,0,0.5) 0%, transparent 100%);
         z-index: 2;
     }
 `
@@ -42,9 +42,7 @@ export const VideoBg = styled.video`
     height: 100%;
     -o-object-fit: cover;
     object-fit: cover;
-    background: #292233;
-    -webkit-filter: hue-rotate(90deg);
-    filter: hue-rotate(-90deg);
+    background: #222222;
 `
 
 export const HeroContent = styled.div`
