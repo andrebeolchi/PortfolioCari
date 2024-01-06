@@ -1,9 +1,9 @@
-import HeroSection from "./components/HeroSection";
+import AppRoutes from "./routes";
 
 function App() {
 	return (
 		<>
-			<HeroSection />
+			<AppRoutes />
 		</>
 	);
 }
