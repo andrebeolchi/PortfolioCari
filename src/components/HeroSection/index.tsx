@@ -3,7 +3,22 @@ import HeaderTabs from "../HeaderTabs";
 export default function HeroSection() {
 	return (
 		<div className="bg-white">
-			<HeaderTabs />
+			<HeaderTabs
+				tabs={[
+					{
+						name: "Formação",
+						href: "#"
+					},
+					{
+						name: "Projetos",
+						href: "#"
+					},
+					{
+						name: "Contato",
+						href: "#"
+					}
+				]}
+			/>
 
 			<div className="relative isolate px-6 pt-14 lg:px-8">
 				<div

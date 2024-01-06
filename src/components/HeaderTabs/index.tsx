@@ -2,15 +2,9 @@ import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import FlyoutMenu from "./FlyoutMenu";
+import { FlyoutMenuProps } from "./types";
 
-const navigation = [
-	{ name: "Formação", href: "#" },
-	{ name: "Features", href: "#" },
-	{ name: "Marketplace", href: "#" },
-	{ name: "Company", href: "#" }
-];
-
-export default function HeaderTabs() {
+export default function HeaderTabs({ tabs }: { tabs: FlyoutMenuProps[] }) {
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
 	return (
@@ -43,7 +37,7 @@ export default function HeaderTabs() {
 					</button>
 				</div>
 				<div className="hidden lg:flex lg:gap-x-12">
-					{navigation.map((item) => (
+					{tabs.map((item) => (
 						<FlyoutMenu menu={item} />
 					))}
 				</div>
@@ -87,7 +81,7 @@ export default function HeaderTabs() {
 					<div className="mt-6 flow-root">
 						<div className="-my-6 divide-y divide-gray-500/10">
 							<div className="space-y-2 py-6">
-								{navigation.map((item) => (
+								{tabs?.map((item) => (
 									<a
 										key={item.name}
 										href={item.href}
