@@ -1,7 +1,9 @@
+import { lazy } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Dashboard from "../pages/Dashboard";
-import Home from "../pages/Home";
-import Login from "../pages/Login";
+
+const Home = lazy(() => import("../pages/Home"));
+const Login = lazy(() => import("../pages/Login"));
+const Dashboard = lazy(() => import("../pages/Dashboard"));
 
 export default function AppRoutes() {
 	return (
@@ -9,24 +11,21 @@ export default function AppRoutes() {
 			<Routes>
 				<Route
 					path="/"
-					element={<Home />}>
-					<Route
-						index
-						element={<Home />}
-					/>
-					<Route
-						path="/login"
-						element={<Login />}
-					/>
-					<Route
-						path="dashboard"
-						element={<Dashboard />}
-					/>
-					<Route
-						path="*"
-						element={<Dashboard />}
-					/>
-				</Route>
+					element={<Home />}
+				/>
+				<Route
+					path="/login"
+					element={<Login />}
+				/>
+				<Route
+					path="/dashboard"
+					element={<Dashboard />}
+				/>
+
+				<Route
+					path="*"
+					element={<Home />}
+				/>
 			</Routes>
 		</BrowserRouter>
 	);
