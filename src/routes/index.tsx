@@ -6,7 +6,7 @@ import { ProtectedRoute } from "./ProtectedRoute";
 
 const Home = lazy(() => import("../pages/Home"));
 const Login = lazy(() => import("../pages/Login"));
-const EditHero = lazy(() => import("../pages/EditHero"));
+const EditHero = lazy(() => import("../pages/Edit/Hero"));
 
 export default function AppRoutes() {
 	return (

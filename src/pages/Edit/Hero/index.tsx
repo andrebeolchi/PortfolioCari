@@ -1,5 +1,5 @@
-import HeaderTabs from "../../components/HeaderTabs";
-import LoggedPage from "../../views/LoggedPage";
+import HeaderTabs from "../../../components/HeaderTabs";
+import LoggedPage from "../../../views/LoggedPage";
 
 export default function EditHero() {
 	return (
