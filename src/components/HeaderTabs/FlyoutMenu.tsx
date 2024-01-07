@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 import { FlyoutMenuProps } from "./types";
 
 export default function FlyoutMenu({ menu }: { menu: FlyoutMenuProps }) {
-	const { name, submenus, callsToAction, href } = menu;
+	const { name, submenus, callsToAction, href, onClick } = menu;
 
 	const isExpandable = Boolean(submenus?.length) || Boolean(callsToAction?.length);
 
@@ -14,6 +14,12 @@ export default function FlyoutMenu({ menu }: { menu: FlyoutMenuProps }) {
 			<Popover.Button className="inline-flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
 				{isExpandable ? (
 					<span>{name}</span>
+				) : onClick ? (
+					<span
+						onClick={onClick}
+						className="cursor-pointer ">
+						{name}
+					</span>
 				) : (
 					<NavLink
 						to={href}

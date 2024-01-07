@@ -1,20 +1,20 @@
 import HeaderTabs from "../../../components/HeaderTabs";
 
-export default function EditHeader() {
+export default function EditHeader({ onChangeTab }: { onChangeTab?: (tab: "HERO" | "ACADEMIC" | "PROJECTS") => void }) {
 	return (
 		<HeaderTabs
 			tabs={[
 				{
 					name: "Hero Section",
-					href: "/edit/hero"
+					onClick: () => onChangeTab?.("HERO")
 				},
 				{
 					name: "Formação Acadêmica",
-					href: "/edit/academic"
+					onClick: () => onChangeTab?.("ACADEMIC")
 				},
 				{
 					name: "Projetos",
-					href: "/edit/projects"
+					onClick: () => onChangeTab?.("PROJECTS")
 				}
 			]}
 		/>
