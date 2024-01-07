@@ -1,11 +1,13 @@
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
+import { useHero } from "../../context/HeroContext.hooks";
 import FlyoutMenu from "./FlyoutMenu";
 import { FlyoutMenuProps } from "./types";
 
 export default function HeaderTabs({ tabs }: { tabs: FlyoutMenuProps[] }) {
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+	const { data } = useHero();
 
 	return (
 		<header className="absolute inset-x-0 top-0 z-50">
@@ -14,12 +16,12 @@ export default function HeaderTabs({ tabs }: { tabs: FlyoutMenuProps[] }) {
 				aria-label="Global">
 				<div className="flex lg:flex-1">
 					<a
-						href="#"
+						href="/"
 						className="-m-1.5 p-1.5">
 						<span className="sr-only">Your Company</span>
 						<img
 							className="h-8 w-auto"
-							src="https://tailwindui.com/img/logos/mark.svg?color=lime&shade=600"
+							src={data?.imageUrl}
 							alt=""
 						/>
 					</a>
@@ -63,7 +65,7 @@ export default function HeaderTabs({ tabs }: { tabs: FlyoutMenuProps[] }) {
 							<span className="sr-only">Your Company</span>
 							<img
 								className="h-8 w-auto"
-								src="https://tailwindui.com/img/logos/mark.svg?color=lime&shade=600"
+								src={data?.imageUrl}
 								alt=""
 							/>
 						</a>

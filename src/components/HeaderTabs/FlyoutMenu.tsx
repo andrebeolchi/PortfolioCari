@@ -1,6 +1,7 @@
 import { Popover, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Fragment } from "react";
+import { NavLink } from "react-router-dom";
 import { FlyoutMenuProps } from "./types";
 
 export default function FlyoutMenu({ menu }: { menu: FlyoutMenuProps }) {
@@ -11,7 +12,15 @@ export default function FlyoutMenu({ menu }: { menu: FlyoutMenuProps }) {
 	return (
 		<Popover className="relative">
 			<Popover.Button className="inline-flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
-				<span>{name}</span>
+				{isExpandable ? (
+					<span>{name}</span>
+				) : (
+					<NavLink
+						to={href}
+						className={({ isActive, isPending }) => (isPending ? "pending" : isActive ? "active" : "")}>
+						{name}
+					</NavLink>
+				)}
 				{isExpandable && (
 					<ChevronDownIcon
 						className="h-5 w-5"
@@ -43,12 +52,12 @@ export default function FlyoutMenu({ menu }: { menu: FlyoutMenuProps }) {
 											/>
 										</div>
 										<div>
-											<a
-												href={item.href}
+											<NavLink
+												to={href}
 												className="font-semibold text-gray-900">
 												{item.name}
 												<span className="absolute inset-0" />
-											</a>
+											</NavLink>
 											<p className="mt-1 text-gray-600">{item.description}</p>
 										</div>
 									</div>
@@ -56,16 +65,16 @@ export default function FlyoutMenu({ menu }: { menu: FlyoutMenuProps }) {
 							</div>
 							<div className="grid grid-cols-2 divide-x divide-gray-900/5 bg-gray-50">
 								{callsToAction?.map((item) => (
-									<a
+									<NavLink
 										key={item.name}
-										href={item.href}
+										to={href}
 										className="flex items-center justify-center gap-x-2.5 p-3 font-semibold text-gray-900 hover:bg-gray-100">
 										<item.icon
 											className="h-5 w-5 flex-none text-gray-400"
 											aria-hidden="true"
 										/>
 										{item.name}
-									</a>
+									</NavLink>
 								))}
 							</div>
 						</div>

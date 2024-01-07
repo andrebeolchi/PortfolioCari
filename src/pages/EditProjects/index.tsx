@@ -1,12 +1,13 @@
 import HeaderTabs from "../../components/HeaderTabs";
+import LoggedPage from "../../views/LoggedPage";
 
-export default function Dashboard() {
+export default function EditHero() {
 	return (
 		<div>
 			<HeaderTabs
 				tabs={[
 					{
-						name: "Tela Inicial",
+						name: "Hero Section",
 						href: "#"
 					},
 					{
@@ -15,6 +16,8 @@ export default function Dashboard() {
 					}
 				]}
 			/>
+
+			<LoggedPage />
 		</div>
 	);
 }
