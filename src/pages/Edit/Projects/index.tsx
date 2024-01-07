@@ -1,21 +1,10 @@
-import HeaderTabs from "../../../components/HeaderTabs";
 import LoggedPage from "../../../views/LoggedPage";
+import EditHeader from "../components/EditHeader";
 
 export default function EditHero() {
 	return (
 		<div>
-			<HeaderTabs
-				tabs={[
-					{
-						name: "Hero Section",
-						href: "#"
-					},
-					{
-						name: "Projetos",
-						href: "#"
-					}
-				]}
-			/>
+			<EditHeader />
 
 			<LoggedPage />
 		</div>
