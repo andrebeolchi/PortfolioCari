@@ -7,6 +7,8 @@ import { ProtectedRoute } from "./ProtectedRoute";
 const Home = lazy(() => import("../pages/Home"));
 const Login = lazy(() => import("../pages/Login"));
 const EditHero = lazy(() => import("../pages/Edit/Hero"));
+const EditAcademic = lazy(() => import("../pages/Edit/Academic"));
+const EditProjects = lazy(() => import("../pages/Edit/Projects"));
 
 export default function AppRoutes() {
 	return (
@@ -36,7 +38,7 @@ export default function AppRoutes() {
 							path="/edit/academic"
 							element={
 								<ProtectedRoute>
-									<EditHero />
+									<EditAcademic />
 								</ProtectedRoute>
 							}
 						/>
@@ -45,7 +47,7 @@ export default function AppRoutes() {
 							path="/edit/projects"
 							element={
 								<ProtectedRoute>
-									<EditHero />
+									<EditProjects />
 								</ProtectedRoute>
 							}
 						/>
