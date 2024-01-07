@@ -10,7 +10,7 @@ export default function EditHeader() {
 				},
 				{
 					name: "Formação Acadêmica",
-					href: "/edit/education"
+					href: "/edit/academic"
 				},
 				{
 					name: "Projetos",

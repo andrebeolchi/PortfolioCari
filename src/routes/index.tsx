@@ -33,6 +33,15 @@ export default function AppRoutes() {
 						/>
 
 						<Route
+							path="/edit/academic"
+							element={
+								<ProtectedRoute>
+									<EditHero />
+								</ProtectedRoute>
+							}
+						/>
+
+						<Route
 							path="/edit/projects"
 							element={
 								<ProtectedRoute>
