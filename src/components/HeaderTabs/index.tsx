@@ -1,12 +1,14 @@
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
+import { useAuth } from "../../context/AuthContext.hooks";
 import { useHero } from "../../context/HeroContext.hooks";
 import FlyoutMenu from "./FlyoutMenu";
 import { FlyoutMenuProps } from "./types";
 
 export default function HeaderTabs({ tabs }: { tabs: FlyoutMenuProps[] }) {
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+	const { isAuthenticated } = useAuth();
 	const { data } = useHero();
 
 	return (
@@ -44,11 +46,13 @@ export default function HeaderTabs({ tabs }: { tabs: FlyoutMenuProps[] }) {
 					))}
 				</div>
 				<div className="hidden lg:flex lg:flex-1 lg:justify-end">
-					<a
-						href="#"
-						className="text-sm font-semibold leading-6 text-gray-900">
-						Log in <span aria-hidden="true">&rarr;</span>
-					</a>
+					{isAuthenticated && (
+						<a
+							href="#"
+							className="text-sm font-semibold leading-6 text-gray-900">
+							Log out <span aria-hidden="true">&rarr;</span>
+						</a>
+					)}
 				</div>
 			</nav>
 			<Dialog
@@ -92,13 +96,15 @@ export default function HeaderTabs({ tabs }: { tabs: FlyoutMenuProps[] }) {
 									</a>
 								))}
 							</div>
-							<div className="py-6">
-								<a
-									href="#"
-									className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
-									Log in
-								</a>
-							</div>
+							{isAuthenticated && (
+								<div className="py-6">
+									<a
+										href="#"
+										className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+										Log out
+									</a>
+								</div>
+							)}
 						</div>
 					</div>
 				</Dialog.Panel>
