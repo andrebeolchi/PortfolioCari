@@ -9,12 +9,14 @@ export default function FlyoutMenu({ menu }: { menu: FlyoutMenuProps }) {
 
 	const isExpandable = Boolean(submenus?.length) || Boolean(callsToAction?.length);
 
+	console.log(isExpandable);
+
 	return (
 		<Popover className="relative">
 			<Popover.Button className="inline-flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
 				{isExpandable ? (
 					<span>{name}</span>
-				) : onClick ? (
+				) : typeof onClick !== "undefined" ? (
 					<span
 						onClick={onClick}
 						className="cursor-pointer ">
@@ -52,10 +54,18 @@ export default function FlyoutMenu({ menu }: { menu: FlyoutMenuProps }) {
 										key={item.name}
 										className="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
 										<div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-											<item.icon
-												className="h-6 w-6 text-gray-600 group-hover:text-lime-500"
-												aria-hidden="true"
-											/>
+											{item.icon ? (
+												<item.icon
+													className="h-6 w-6 text-gray-600 group-hover:text-lime-500"
+													aria-hidden="true"
+												/>
+											) : (
+												<img
+													className="h-5 w-5 flex-none text-gray-400"
+													src={item.imageUrl}
+													aria-hidden="true"
+												/>
+											)}
 										</div>
 										<div>
 											<NavLink
@@ -70,18 +80,31 @@ export default function FlyoutMenu({ menu }: { menu: FlyoutMenuProps }) {
 								))}
 							</div>
 							<div className="grid grid-cols-2 divide-x divide-gray-900/5 bg-gray-50">
-								{callsToAction?.map((item) => (
-									<NavLink
-										key={item.name}
-										to={href}
-										className="flex items-center justify-center gap-x-2.5 p-3 font-semibold text-gray-900 hover:bg-gray-100">
-										<item.icon
-											className="h-5 w-5 flex-none text-gray-400"
-											aria-hidden="true"
-										/>
-										{item.name}
-									</NavLink>
-								))}
+								{callsToAction?.map((item) =>
+									item.onClick ? (
+										<span
+											key={item.name}
+											onClick={item.onClick}
+											className="flex items-center justify-center gap-x-2.5 p-3 font-semibold text-gray-900 hover:bg-gray-100 cursor-pointer">
+											<item.icon
+												className="h-5 w-5 flex-none text-gray-400"
+												aria-hidden="true"
+											/>
+											{item.name}
+										</span>
+									) : (
+										<NavLink
+											key={item.name}
+											to={href}
+											className="flex items-center justify-center gap-x-2.5 p-3 font-semibold text-gray-900 hover:bg-gray-100">
+											<item.icon
+												className="h-5 w-5 flex-none text-gray-400"
+												aria-hidden="true"
+											/>
+											{item.name}
+										</NavLink>
+									)
+								)}
 							</div>
 						</div>
 					</Popover.Panel>

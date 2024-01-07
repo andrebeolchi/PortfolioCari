@@ -1,3 +1,4 @@
+import { BarsArrowDownIcon, PencilIcon } from "@heroicons/react/20/solid";
 import { useState } from "react";
 import HeaderTabs from "../../components/HeaderTabs";
 import EditAcademic from "../../views/EditAcademic";
@@ -27,11 +28,30 @@ export default function EditPage() {
 					},
 					{
 						name: "Formação Acadêmica",
-						onClick: () => {
-							console.log("academ");
-
-							setTab("ACADEMIC");
-						}
+						submenus: [
+							{
+								name: "Anhembi Morumbi",
+								href: "#",
+								description: "Arquitetura e Urbanismo",
+								imageUrl: "https://picsum.photos/200/300"
+							}
+						],
+						callsToAction: [
+							{
+								name: "Editar Detalhes",
+								onClick: () => {
+									setTab("ACADEMIC");
+								},
+								icon: PencilIcon
+							},
+							{
+								name: "Reordenar Cursos",
+								onClick: () => {
+									console.log("Reordenar Cursos");
+								},
+								icon: BarsArrowDownIcon
+							}
+						]
 					},
 					{
 						name: "Projetos",
