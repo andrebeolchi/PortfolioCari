@@ -39,7 +39,7 @@ export default function Login() {
 
 	useEffect(() => {
 		if (isAuthenticated) {
-			navigate("/edit/hero");
+			navigate("/edit");
 		}
 	}, [isAuthenticated, navigate]);
 

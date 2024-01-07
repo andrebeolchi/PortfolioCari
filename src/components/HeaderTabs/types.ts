@@ -1,6 +1,6 @@
 export interface FlyoutMenuProps {
 	name: string;
-	href: string;
+	href?: string;
 	submenus?: SubmenuProps[];
 	callsToAction?: Omit<SubmenuProps, "description">[];
 	onClick?: () => void;

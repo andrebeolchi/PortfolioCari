@@ -22,7 +22,7 @@ export default function FlyoutMenu({ menu }: { menu: FlyoutMenuProps }) {
 					</span>
 				) : (
 					<NavLink
-						to={href}
+						to={href || "/"}
 						className={({ isActive, isPending }) => (isPending ? "pending" : isActive ? "active" : "")}>
 						{name}
 					</NavLink>

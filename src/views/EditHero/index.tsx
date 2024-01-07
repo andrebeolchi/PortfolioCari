@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useHero } from "../../context/HeroContext.hooks";
 import { HeroProps } from "../../types/Hero.types";
 
-export default function LoggedPage() {
+export default function EditHero() {
 	const { data: details, updateData } = useHero();
 
 	console.log("details ", details);
@@ -78,7 +78,7 @@ export default function LoggedPage() {
 									<textarea
 										id="about"
 										name="about"
-										rows={3}
+										rows={5}
 										className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 										onChange={(event) => setSubtitle(event.target.value)}
 										value={subtitle}

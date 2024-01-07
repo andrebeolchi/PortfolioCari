@@ -2,13 +2,12 @@ import { lazy } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AuthProvider } from "../context/AuthContext";
 import { HeroProvider } from "../context/HeroContext";
+
 import { ProtectedRoute } from "./ProtectedRoute";
 
 const Home = lazy(() => import("../pages/Home"));
 const Login = lazy(() => import("../pages/Login"));
-const EditHero = lazy(() => import("../pages/Edit/Hero"));
-const EditAcademic = lazy(() => import("../pages/Edit/Academic"));
-const EditProjects = lazy(() => import("../pages/Edit/Projects"));
+const EditPage = lazy(() => import("../pages/Edit"));
 
 export default function AppRoutes() {
 	return (
@@ -26,28 +25,10 @@ export default function AppRoutes() {
 						/>
 
 						<Route
-							path="/edit/hero"
+							path="/edit"
 							element={
 								<ProtectedRoute>
-									<EditHero />
-								</ProtectedRoute>
-							}
-						/>
-
-						<Route
-							path="/edit/academic"
-							element={
-								<ProtectedRoute>
-									<EditAcademic />
-								</ProtectedRoute>
-							}
-						/>
-
-						<Route
-							path="/edit/projects"
-							element={
-								<ProtectedRoute>
-									<EditProjects />
+									<EditPage />
 								</ProtectedRoute>
 							}
 						/>
