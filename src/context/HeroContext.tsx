@@ -16,7 +16,8 @@ interface HeroProviderProps {
 export const HeroContext = createContext<HeroContextProps>({
 	data: {
 		title: "",
-		subtitle: ""
+		subtitle: "",
+    imageUrl: "",
 	},
 	updateData: async () => {},
 	isLoading: true
