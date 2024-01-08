@@ -11,6 +11,7 @@ export interface AcademicItemProps {
 	imageUrl: string;
 	date: string;
 	category: string;
+	order: number;
 }
 
 export interface AcademicProps extends AcademicDetailsProps {

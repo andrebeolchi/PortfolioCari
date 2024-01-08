@@ -1,3 +1,4 @@
+import Footer from "../components/Footer";
 import AcademicSection from "../views/AcademicSection";
 import HeroSection from "../views/HeroSection";
 
@@ -6,6 +7,7 @@ export default function Home() {
 		<div>
 			<HeroSection />
 			<AcademicSection />
+			<Footer />
 		</div>
 	);
 }

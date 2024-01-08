@@ -1,4 +1,16 @@
-import { collection, deleteDoc, doc, getDoc, getDocs, setDoc, updateDoc } from "@firebase/firestore";
+import {
+	collection,
+	deleteDoc,
+	doc,
+	getCountFromServer,
+	getDoc,
+	getDocs,
+	orderBy,
+	query,
+	setDoc,
+	updateDoc,
+	writeBatch
+} from "@firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "@firebase/storage";
 import { v4 as uuidv4 } from "uuid";
 import { AcademicDetailsProps, AcademicItemProps } from "../types/Academic.types";
@@ -22,7 +34,9 @@ class AcademicApi {
 		try {
 			const ref = collection(db, "data", "academic-education", "list");
 
-			const data = await getDocs(ref);
+			const ordered = query(ref, orderBy("order", "asc"));
+
+			const data = await getDocs(ordered);
 
 			return data.docs.map((doc) => doc.data() as AcademicItemProps);
 		} catch (error) {
@@ -59,13 +73,16 @@ class AcademicApi {
 
 			const detailsRef = doc(db, `data/academic-education/list/${newId}`);
 
+			const snapshot = await getCountFromServer(collection(db, "data/academic-education/list"));
+
 			const body = {
 				id: newId,
 				title: item.title,
 				subtitle: item.subtitle,
 				imageUrl,
 				category: item.category,
-				date: item.date
+				date: item.date,
+				order: (snapshot.data().count ?? 0) + 1
 			};
 
 			await setDoc(detailsRef, body);
@@ -112,6 +129,25 @@ class AcademicApi {
 			const detailsRef = doc(db, "data", "academic-education", "list", id);
 
 			await deleteDoc(detailsRef);
+		} catch (error) {
+			console.log("error", error);
+			throw new Error(error.response.data.error);
+		}
+	}
+
+	async reorderAcademicItems(items: AcademicItemProps[]): Promise<void> {
+		try {
+			const batch = writeBatch(db);
+
+			items.forEach((item, index) => {
+				const detailsRef = doc(db, "data", "academic-education", "list", item.id);
+
+				console.log("detailsRef", item, index);
+
+				batch.update(detailsRef, { order: item.order });
+			});
+
+			await batch.commit();
 		} catch (error) {
 			console.log("error", error);
 			throw new Error(error.response.data.error);
