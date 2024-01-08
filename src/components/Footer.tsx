@@ -21,27 +21,43 @@ export default function Footer() {
 							</span>
 						</a>
 					</div>
-					<div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
-						{/* <div>
-							<h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Resources</h2>
-							<ul className="text-gray-500 dark:text-gray-400 font-medium">
-								<li className="mb-4">
-									<a
-										href="https://flowbite.com/"
-										className="hover:underline">
-										Flowbite
-									</a>
-								</li>
-								<li>
-									<a
-										href="https://tailwindcss.com/"
-										className="hover:underline">
-										Tailwind CSS
-									</a>
-								</li>
-							</ul>
-						</div> */}
-					</div>
+					{[
+						{
+							title: "Cursos",
+							links: [
+								{
+									title: "React",
+									url: "/react"
+								},
+								{
+									title: "Next.js",
+									url: "/nextjs"
+								},
+								{
+									title: "Tailwind CSS",
+									url: "/tailwindcss"
+								}
+							]
+						}
+					].map(({ title, links }) => (
+						<div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
+							<div>
+								<h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">{title}</h2>
+								<ul className="text-gray-500 dark:text-gray-400 font-medium">
+									{links.map((link) => (
+										<li className="mb-4">
+											<a
+												href={link.url}
+												about="_blank"
+												className="hover:underline">
+												{link.title}
+											</a>
+										</li>
+									))}
+								</ul>
+							</div>
+						</div>
+					))}
 				</div>
 				<hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
 				<div className="sm:flex sm:items-center sm:justify-between">
