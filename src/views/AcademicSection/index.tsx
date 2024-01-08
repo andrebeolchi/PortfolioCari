@@ -15,6 +15,15 @@ export default function AcademicSection() {
 						<article
 							key={post.id}
 							className="flex max-w-xl flex-col items-start justify-between">
+							{post.imageUrl && (
+								<div className="mb-8 bg-gray-50 p-4 rounded-xl w-full border-gray-150 border shadow-sm">
+									<img
+										src={post.imageUrl}
+										alt=""
+										className="h-48 w-full rounded-lg object-contain"
+									/>
+								</div>
+							)}
 							<div className="flex items-center gap-x-4 text-xs">
 								<p className="text-gray-500">{post.date}</p>
 								<p className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600">
@@ -30,15 +39,6 @@ export default function AcademicSection() {
 								</h3>
 								{post.subtitle && <p className="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">{post.subtitle}</p>}
 							</div>
-							{post.imageUrl && (
-								<div className="mt-8 bg-gray-50 p-4 rounded-lg w-full">
-									<img
-										src={post.imageUrl}
-										alt=""
-										className="h-20 w-full rounded-lg object-contain"
-									/>
-								</div>
-							)}
 						</article>
 					))}
 				</div>
