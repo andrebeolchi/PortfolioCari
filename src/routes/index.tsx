@@ -69,7 +69,7 @@ export default function AppRoutes() {
 								element={
 									<ProtectedRoute>
 										<EditPage>
-											<EditAcademic />
+											<EditProjects />
 										</EditPage>
 									</ProtectedRoute>
 								}
