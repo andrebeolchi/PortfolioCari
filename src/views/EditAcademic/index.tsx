@@ -1,18 +1,5 @@
 import { useState } from "react";
 
-interface AcademicProps {
-	title: string;
-	subtitle: string;
-}
-
-interface PlaceProps {
-	date: string;
-	chip: string;
-	title: string;
-	imageUrl: string;
-	imageFile: Blob | Uint8Array | ArrayBuffer;
-}
-
 export default function EditAcademic() {
 	const [title, setTitle] = useState<AcademicProps["title"]>("");
 	const [subtitle, setSubtitle] = useState<AcademicProps["subtitle"]>("");
@@ -87,12 +74,12 @@ export default function EditAcademic() {
 					<button
 						type="button"
 						className="text-sm font-semibold leading-6 text-gray-900">
-						Cancel
+						Cancelar
 					</button>
 					<button
 						type="submit"
 						className="rounded-md bg-lime-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-lime-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-600">
-						Save
+						Salvar
 					</button>
 				</div>
 			</form>

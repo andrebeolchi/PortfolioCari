@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AuthProvider } from "../context/AuthContext";
 import { HeroProvider } from "../context/HeroContext";
 
+import { AcademicProvider } from "../context/AcademicContext";
 import { ProtectedRoute } from "./ProtectedRoute";
 
 const Home = lazy(() => import("../pages/Home"));
@@ -13,32 +14,34 @@ export default function AppRoutes() {
 	return (
 		<AuthProvider>
 			<HeroProvider>
-				<BrowserRouter>
-					<Routes>
-						<Route
-							path="/"
-							element={<Home />}
-						/>
-						<Route
-							path="/login"
-							element={<Login />}
-						/>
+				<AcademicProvider>
+					<BrowserRouter>
+						<Routes>
+							<Route
+								path="/"
+								element={<Home />}
+							/>
+							<Route
+								path="/login"
+								element={<Login />}
+							/>
 
-						<Route
-							path="/edit"
-							element={
-								<ProtectedRoute>
-									<EditPage />
-								</ProtectedRoute>
-							}
-						/>
+							<Route
+								path="/edit"
+								element={
+									<ProtectedRoute>
+										<EditPage />
+									</ProtectedRoute>
+								}
+							/>
 
-						<Route
-							path="*"
-							element={<Home />}
-						/>
-					</Routes>
-				</BrowserRouter>
+							<Route
+								path="*"
+								element={<Home />}
+							/>
+						</Routes>
+					</BrowserRouter>
+				</AcademicProvider>
 			</HeroProvider>
 		</AuthProvider>
 	);

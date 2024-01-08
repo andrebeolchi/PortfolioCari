@@ -21,21 +21,6 @@ const defaultPosts = [
 	}
 ];
 
-interface PostProps {
-	id: number;
-	title: string;
-	href: string;
-	description: string;
-	date: string;
-	category: string;
-	imageUrl: string;
-}
-
-interface DetailsProps {
-	title: string;
-	description: string;
-}
-
 export default function AcademicSection() {
 	const [posts, setPosts] = useState<PostProps[]>([]);
 	const [details, setDetails] = useState<DetailsProps>();

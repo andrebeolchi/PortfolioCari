@@ -1,18 +1,35 @@
-import { BarsArrowDownIcon, PencilIcon } from "@heroicons/react/20/solid";
+import { AcademicCapIcon, PencilIcon } from "@heroicons/react/20/solid";
 import { useState } from "react";
 import HeaderTabs from "../../components/HeaderTabs";
+import { useAcademic } from "../../context/AcademicContext.hooks";
 import EditAcademic from "../../views/EditAcademic";
 import EditHero from "../../views/EditHero";
 import EditProjects from "../../views/EditProjects";
 
+type TabType = "HERO" | "ACADEMIC" | "ACADEMIC_ITEM" | "PROJECTS";
+
 export default function EditPage() {
-	const [tab, setTab] = useState<"HERO" | "ACADEMIC" | "PROJECTS">("HERO");
+	const [tab, setTab] = useState<TabType>("HERO");
+	const [selectedItem, setSelectedItem] = useState<unknown>(null);
+	const { data: academicData } = useAcademic();
+
+	console.log("academicData ", academicData);
+
+	const onPressItem = (tab: TabType, item: unknown) => {
+		setTab(tab);
+		setSelectedItem(item);
+	};
 
 	const Page = {
 		HERO: <EditHero />,
 		ACADEMIC: <EditAcademic />,
+		ACADEMIC_ITEM: <EditAcademic selectedItem={selectedItem} />,
 		PROJECTS: <EditProjects />
 	}[tab];
+
+	if (!academicData) {
+		return null;
+	}
 
 	return (
 		<div>
@@ -27,15 +44,15 @@ export default function EditPage() {
 						}
 					},
 					{
-						name: "Formação Acadêmica",
-						submenus: [
-							{
-								name: "Anhembi Morumbi",
-								href: "#",
-								description: "Arquitetura e Urbanismo",
-								imageUrl: "https://picsum.photos/200/300"
+						name: academicData.title,
+						submenus: academicData.items.map((item) => ({
+							name: item.title,
+							description: item.category,
+							imageUrl: item.imageUrl,
+							onClick: () => {
+								onPressItem("ACADEMIC_ITEM", item);
 							}
-						],
+						})),
 						callsToAction: [
 							{
 								name: "Editar Detalhes",
@@ -45,11 +62,11 @@ export default function EditPage() {
 								icon: PencilIcon
 							},
 							{
-								name: "Reordenar Cursos",
+								name: "Adicionar Curso",
 								onClick: () => {
 									console.log("Reordenar Cursos");
 								},
-								icon: BarsArrowDownIcon
+								icon: AcademicCapIcon
 							}
 						]
 					},

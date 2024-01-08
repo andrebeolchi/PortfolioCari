@@ -9,8 +9,6 @@ export default function FlyoutMenu({ menu }: { menu: FlyoutMenuProps }) {
 
 	const isExpandable = Boolean(submenus?.length) || Boolean(callsToAction?.length);
 
-	console.log(isExpandable);
-
 	return (
 		<Popover className="relative">
 			<Popover.Button className="inline-flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
