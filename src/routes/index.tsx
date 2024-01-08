@@ -4,6 +4,9 @@ import { AuthProvider } from "../context/AuthContext";
 import { HeroProvider } from "../context/HeroContext";
 
 import { AcademicProvider } from "../context/AcademicContext";
+import EditAcademic from "../views/EditAcademic";
+import EditHero from "../views/EditHero";
+import EditProjects from "../views/EditProjects";
 import { ProtectedRoute } from "./ProtectedRoute";
 
 const Home = lazy(() => import("../pages/Home"));
@@ -21,6 +24,7 @@ export default function AppRoutes() {
 								path="/"
 								element={<Home />}
 							/>
+
 							<Route
 								path="/login"
 								element={<Login />}
@@ -30,7 +34,53 @@ export default function AppRoutes() {
 								path="/edit"
 								element={
 									<ProtectedRoute>
-										<EditPage />
+										<EditPage>
+											<EditHero />
+										</EditPage>
+									</ProtectedRoute>
+								}
+							/>
+
+							<Route
+								path="/edit/academic"
+								element={
+									<ProtectedRoute>
+										<EditPage>
+											<EditAcademic />
+										</EditPage>
+									</ProtectedRoute>
+								}
+							/>
+
+							<Route
+								path="/edit/academic/:id"
+								element={
+									<ProtectedRoute>
+										<EditPage>
+											<EditAcademic />
+										</EditPage>
+									</ProtectedRoute>
+								}
+							/>
+
+							<Route
+								path="/edit/projects"
+								element={
+									<ProtectedRoute>
+										<EditPage>
+											<EditAcademic />
+										</EditPage>
+									</ProtectedRoute>
+								}
+							/>
+
+							<Route
+								path="/edit/projects/:id"
+								element={
+									<ProtectedRoute>
+										<EditPage>
+											<EditProjects />
+										</EditPage>
 									</ProtectedRoute>
 								}
 							/>

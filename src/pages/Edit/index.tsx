@@ -1,31 +1,9 @@
-import { AcademicCapIcon, PencilIcon } from "@heroicons/react/20/solid";
-import { useState } from "react";
+import { AcademicCapIcon, FolderPlusIcon, PencilIcon } from "@heroicons/react/20/solid";
 import HeaderTabs from "../../components/HeaderTabs";
 import { useAcademic } from "../../context/AcademicContext.hooks";
-import EditAcademic from "../../views/EditAcademic";
-import EditHero from "../../views/EditHero";
-import EditProjects from "../../views/EditProjects";
 
-type TabType = "HERO" | "ACADEMIC" | "ACADEMIC_ITEM" | "PROJECTS";
-
-export default function EditPage() {
-	const [tab, setTab] = useState<TabType>("HERO");
-	const [selectedItem, setSelectedItem] = useState<unknown>(null);
+export default function EditPage({ children }: { children: React.ReactNode }) {
 	const { data: academicData } = useAcademic();
-
-	console.log("academicData ", academicData);
-
-	const onPressItem = (tab: TabType, item: unknown) => {
-		setTab(tab);
-		setSelectedItem(item);
-	};
-
-	const Page = {
-		HERO: <EditHero />,
-		ACADEMIC: <EditAcademic />,
-		ACADEMIC_ITEM: <EditAcademic selectedItem={selectedItem} />,
-		PROJECTS: <EditProjects />
-	}[tab];
 
 	if (!academicData) {
 		return null;
@@ -36,52 +14,59 @@ export default function EditPage() {
 			<HeaderTabs
 				tabs={[
 					{
-						name: "Hero Section",
-						onClick: () => {
-							console.log("Hero");
-
-							setTab("HERO");
-						}
+						name: "Início",
+						href: "/edit"
 					},
 					{
 						name: academicData.title,
-						submenus: academicData.items.map((item) => ({
+						submenus: academicData.items?.map((item) => ({
 							name: item.title,
 							description: item.category,
 							imageUrl: item.imageUrl,
-							onClick: () => {
-								onPressItem("ACADEMIC_ITEM", item);
-							}
+							href: `/edit/academic/${item?.id}`
 						})),
+						emptyState: {
+							title: "Nenhuma formação adicionada",
+							description: "Adicione alguma para que seja exibido em sua página."
+						},
 						callsToAction: [
 							{
 								name: "Editar Detalhes",
-								onClick: () => {
-									setTab("ACADEMIC");
-								},
+								href: "/edit/academic",
 								icon: PencilIcon
 							},
 							{
 								name: "Adicionar Curso",
-								onClick: () => {
-									console.log("Reordenar Cursos");
-								},
+								href: "/edit/academic/new",
 								icon: AcademicCapIcon
 							}
 						]
 					},
 					{
 						name: "Projetos",
-						onClick: () => {
-							console.log("projects");
-
-							setTab("PROJECTS");
-						}
+						submenus: []?.map((item) => ({
+							name: item.title,
+							description: item.category,
+							imageUrl: item.imageUrl,
+							href: `/edit/academic/${item?.id}`
+						})),
+						callsToAction: [
+							{
+								name: "Editar Detalhes",
+								href: "/edit/projects",
+								icon: PencilIcon
+							},
+							{
+								name: "Adicionar Projeto",
+								href: "/edit/projects/new",
+								icon: FolderPlusIcon
+							}
+						]
 					}
 				]}
 			/>
 
-			{Page}
+			{children}
 		</div>
 	);
 }

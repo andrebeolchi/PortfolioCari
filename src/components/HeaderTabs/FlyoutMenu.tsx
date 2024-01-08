@@ -1,11 +1,11 @@
 import { Popover, Transition } from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import { ChevronDownIcon, InformationCircleIcon } from "@heroicons/react/20/solid";
 import { Fragment } from "react";
 import { NavLink } from "react-router-dom";
 import { FlyoutMenuProps } from "./types";
 
 export default function FlyoutMenu({ menu }: { menu: FlyoutMenuProps }) {
-	const { name, submenus, callsToAction, href, onClick } = menu;
+	const { name, submenus, callsToAction, href, emptyState } = menu;
 
 	const isExpandable = Boolean(submenus?.length) || Boolean(callsToAction?.length);
 
@@ -14,12 +14,6 @@ export default function FlyoutMenu({ menu }: { menu: FlyoutMenuProps }) {
 			<Popover.Button className="inline-flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
 				{isExpandable ? (
 					<span>{name}</span>
-				) : typeof onClick !== "undefined" ? (
-					<span
-						onClick={onClick}
-						className="cursor-pointer ">
-						{name}
-					</span>
 				) : (
 					<NavLink
 						to={href || "/"}
@@ -47,6 +41,25 @@ export default function FlyoutMenu({ menu }: { menu: FlyoutMenuProps }) {
 					<Popover.Panel className="absolute left-1/2 z-10 mt-5 flex w-screen max-w-max -translate-x-1/2 px-4">
 						<div className="w-screen max-w-md flex-auto overflow-hidden rounded-3xl bg-white text-sm leading-6 shadow-lg ring-1 ring-gray-900/5">
 							<div className="p-4">
+								{submenus?.length === 0 && (
+									<div className="flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
+										<div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
+											<InformationCircleIcon
+												className="h-6 w-6 text-gray-600 group-hover:text-lime-500"
+												aria-hidden="true"
+											/>
+										</div>
+										<div>
+											<span className="font-semibold text-gray-900  text-center">
+												{emptyState?.title || "Nenhum item adicionado"}
+												<span className="absolute inset-0" />
+											</span>
+											<p className="mt-1 text-gray-600">
+												{emptyState?.description || "Adicione algum para que seja exibido em sua página."}
+											</p>
+										</div>
+									</div>
+								)}
 								{submenus?.map((item) => (
 									<div
 										key={item.name}
@@ -67,7 +80,7 @@ export default function FlyoutMenu({ menu }: { menu: FlyoutMenuProps }) {
 										</div>
 										<div>
 											<NavLink
-												to={href}
+												to={item.href}
 												className="font-semibold text-gray-900">
 												{item.name}
 												<span className="absolute inset-0" />
@@ -78,31 +91,18 @@ export default function FlyoutMenu({ menu }: { menu: FlyoutMenuProps }) {
 								))}
 							</div>
 							<div className="grid grid-cols-2 divide-x divide-gray-900/5 bg-gray-50">
-								{callsToAction?.map((item) =>
-									item.onClick ? (
-										<span
-											key={item.name}
-											onClick={item.onClick}
-											className="flex items-center justify-center gap-x-2.5 p-3 font-semibold text-gray-900 hover:bg-gray-100 cursor-pointer">
-											<item.icon
-												className="h-5 w-5 flex-none text-gray-400"
-												aria-hidden="true"
-											/>
-											{item.name}
-										</span>
-									) : (
-										<NavLink
-											key={item.name}
-											to={href}
-											className="flex items-center justify-center gap-x-2.5 p-3 font-semibold text-gray-900 hover:bg-gray-100">
-											<item.icon
-												className="h-5 w-5 flex-none text-gray-400"
-												aria-hidden="true"
-											/>
-											{item.name}
-										</NavLink>
-									)
-								)}
+								{callsToAction?.map((item) => (
+									<NavLink
+										key={item.name}
+										to={item.href}
+										className="flex items-center justify-center gap-x-2.5 p-3 font-semibold text-gray-900 hover:bg-gray-100">
+										<item.icon
+											className="h-5 w-5 flex-none text-gray-400"
+											aria-hidden="true"
+										/>
+										{item.name}
+									</NavLink>
+								))}
 							</div>
 						</div>
 					</Popover.Panel>

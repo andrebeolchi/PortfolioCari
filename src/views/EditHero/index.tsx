@@ -9,8 +9,8 @@ export default function EditHero() {
 
 	const [title, setTitle] = useState<HeroProps["title"]>("");
 	const [subtitle, setSubtitle] = useState<HeroProps["subtitle"]>("");
-	const [image, setImage] = useState<string>(null);
-	const [inputedImage, setInputedImage] = useState<Blob | Uint8Array | ArrayBuffer>(null);
+	const [image, setImage] = useState<string>("");
+	const [inputedImage, setInputedImage] = useState<Blob | Uint8Array | ArrayBuffer | null>(null);
 
 	useEffect(() => {
 		setTitle(details?.title ?? "");
