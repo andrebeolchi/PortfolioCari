@@ -1,18 +1,34 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useAcademic } from "../../context/AcademicContext.hooks";
+import { AcademicDetailsProps } from "../../types/Academic.types";
 
 export default function EditAcademic() {
-	const [title, setTitle] = useState<AcademicProps["title"]>("");
-	const [subtitle, setSubtitle] = useState<AcademicProps["subtitle"]>("");
+	const { data: academicData, updateData } = useAcademic();
+
+	const [title, setTitle] = useState<AcademicDetailsProps["title"]>("");
+	const [description, setDescription] = useState<AcademicDetailsProps["description"]>("");
 
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
 		try {
-			console.log("teste");
+			await updateData({
+				title,
+				description
+			});
 		} catch (error) {
 			console.log("error ", error);
 		}
 	};
+
+	useEffect(() => {
+		setTitle(academicData?.title ?? "");
+		setDescription(academicData?.description ?? "");
+	}, [academicData]);
+
+	if (!academicData) {
+		return null;
+	}
 
 	return (
 		<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
@@ -51,18 +67,18 @@ export default function EditAcademic() {
 
 							<div className="col-span-full">
 								<label
-									htmlFor="about"
+									htmlFor="description"
 									className="block text-sm font-medium leading-6 text-gray-900">
-									Sobre
+									Descrição
 								</label>
 								<div className="mt-2">
 									<textarea
-										id="about"
-										name="about"
+										id="description"
+										name="description"
 										rows={5}
 										className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-lime-600 sm:text-sm sm:leading-6"
-										onChange={(event) => setSubtitle(event.target.value)}
-										value={subtitle}
+										onChange={(event) => setDescription(event.target.value)}
+										value={description}
 									/>
 								</div>
 							</div>
@@ -71,11 +87,6 @@ export default function EditAcademic() {
 				</div>
 
 				<div className="mt-6 flex items-center justify-end gap-x-6">
-					<button
-						type="button"
-						className="text-sm font-semibold leading-6 text-gray-900">
-						Cancelar
-					</button>
 					<button
 						type="submit"
 						className="rounded-md bg-lime-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-lime-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-600">

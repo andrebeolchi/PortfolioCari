@@ -1,12 +1,12 @@
 import { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import AcademicApi from "../api/AcademicApi";
-import { AcademicProps } from "../types/Academic.types";
+import { AcademicDetailsProps, AcademicProps } from "../types/Academic.types";
 
 interface AcademicContextProps {
-	data: AcademicProps;
+	data?: AcademicProps;
 	isLoading: boolean;
-	updateData: (data: AcademicProps) => Promise<void>;
+	updateData: (data: AcademicDetailsProps) => Promise<void>;
 }
 
 interface AcademicProviderProps {
@@ -40,9 +40,9 @@ export const AcademicProvider = ({ children }: AcademicProviderProps) => {
 		setIsLoading(false);
 	};
 
-	const updateData = async (data: AcademicProps) => {
+	const updateData = async (data: AcademicDetailsProps) => {
 		try {
-			await AcademicApi.updateAcademic(data);
+			await AcademicApi.updateAcademicDetails(data);
 			toast.success("Dados atualizados com sucesso!");
 		} catch (error) {
 			toast.error("Ocorreu um erro ao atualizar os dados!");

@@ -1,4 +1,4 @@
-import { collection, doc, getDoc, getDocs } from "@firebase/firestore";
+import { collection, doc, getDoc, getDocs, updateDoc } from "@firebase/firestore";
 import { AcademicDetailsProps, AcademicItemProps } from "../types/Academic.types";
 import { db } from "../utils/firebase";
 
@@ -23,6 +23,17 @@ class AcademicApi {
 			const data = await getDocs(ref);
 
 			return data.docs.map((doc) => doc.data() as AcademicItemProps);
+		} catch (error) {
+			console.log("error", error);
+			throw new Error(error.response.data.error);
+		}
+	}
+
+	async updateAcademicDetails(data: AcademicDetailsProps): Promise<void> {
+		try {
+			const detailsRef = doc(db, "data", "academic-education");
+
+			await updateDoc(detailsRef, data);
 		} catch (error) {
 			console.log("error", error);
 			throw new Error(error.response.data.error);
