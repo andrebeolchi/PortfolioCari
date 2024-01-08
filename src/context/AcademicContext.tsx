@@ -1,12 +1,14 @@
 import { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import AcademicApi from "../api/AcademicApi";
-import { AcademicDetailsProps, AcademicProps } from "../types/Academic.types";
+import { AcademicDetailsProps, AcademicItemProps, AcademicProps } from "../types/Academic.types";
 
 interface AcademicContextProps {
 	data?: AcademicProps;
 	isLoading: boolean;
 	updateData: (data: AcademicDetailsProps) => Promise<void>;
+  createItem: (data: AcademicItemProps) => Promise<void>;
+  updateItem: (data: AcademicItemProps) => Promise<void>;
 }
 
 interface AcademicProviderProps {
@@ -20,6 +22,8 @@ export const AcademicContext = createContext<AcademicContextProps>({
 		items: []
 	},
 	updateData: async () => {},
+  createItem: async () => {},
+  updateItem: async () => {},
 	isLoading: true
 });
 
@@ -49,6 +53,24 @@ export const AcademicProvider = ({ children }: AcademicProviderProps) => {
 		}
 	};
 
+	const createItem = async (data: AcademicItemProps) => {
+		try {
+			await AcademicApi.createAcademicItem(data);
+			toast.success("Item criado com sucesso!");
+		} catch (error) {
+			toast.error("Ocorreu um erro ao atualizar os dados!");
+		}
+	};
+
+	const updateItem = async (data: AcademicItemProps) => {
+		try {
+			await AcademicApi.updateAcademicItem(data);
+			toast.success("Item criado com sucesso!");
+		} catch (error) {
+			toast.error("Ocorreu um erro ao atualizar os dados!");
+		}
+	};
+
 	useEffect(() => {
 		getData();
 	}, []);
@@ -56,6 +78,7 @@ export const AcademicProvider = ({ children }: AcademicProviderProps) => {
 	const value = {
 		data,
 		updateData,
+    createItem,
 		isLoading
 	};
 

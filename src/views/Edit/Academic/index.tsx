@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useAcademic } from "../../context/AcademicContext.hooks";
-import { AcademicDetailsProps } from "../../types/Academic.types";
+import { useAcademic } from "../../../context/AcademicContext.hooks";
+import { AcademicDetailsProps } from "../../../types/Academic.types";
 
 export default function EditAcademic() {
 	const { data: academicData, updateData } = useAcademic();

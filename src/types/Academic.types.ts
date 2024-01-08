@@ -4,6 +4,7 @@ export interface AcademicDetailsProps {
 }
 
 export interface AcademicItemProps {
+	id: string;
 	title: string;
 	subtitle: string;
 	inputedImage?: Blob | Uint8Array | ArrayBuffer;

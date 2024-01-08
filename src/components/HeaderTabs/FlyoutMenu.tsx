@@ -67,15 +67,17 @@ export default function FlyoutMenu({ menu }: { menu: FlyoutMenuProps }) {
 										<div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
 											{item.icon ? (
 												<item.icon
-													className="h-6 w-6 text-gray-600 group-hover:text-lime-500"
+													className="h-8 w-8 text-gray-600 group-hover:text-lime-500"
 													aria-hidden="true"
 												/>
 											) : (
-												<img
-													className="h-5 w-5 flex-none text-gray-400"
-													src={item.imageUrl}
-													aria-hidden="true"
-												/>
+												item.imageUrl && (
+													<img
+														className="h-8 w-8 flex-none text-gray-400 object-contain"
+														src={item.imageUrl}
+														aria-hidden="true"
+													/>
+												)
 											)}
 										</div>
 										<div>

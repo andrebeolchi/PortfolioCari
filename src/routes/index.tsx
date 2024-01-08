@@ -4,9 +4,10 @@ import { AuthProvider } from "../context/AuthContext";
 import { HeroProvider } from "../context/HeroContext";
 
 import { AcademicProvider } from "../context/AcademicContext";
-import EditAcademic from "../views/EditAcademic";
-import EditHero from "../views/EditHero";
-import EditProjects from "../views/EditProjects";
+import EditAcademic from "../views/Edit/Academic";
+import EditAcademicItems from "../views/Edit/AcademicItems";
+import EditHero from "../views/Edit/Hero";
+import EditProjects from "../views/Edit/Projects";
 import { ProtectedRoute } from "./ProtectedRoute";
 
 const Home = lazy(() => import("../pages/Home"));
@@ -57,7 +58,7 @@ export default function AppRoutes() {
 								element={
 									<ProtectedRoute>
 										<EditPage>
-											<EditAcademic />
+											<EditAcademicItems />
 										</EditPage>
 									</ProtectedRoute>
 								}

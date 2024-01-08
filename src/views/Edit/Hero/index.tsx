@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useHero } from "../../context/HeroContext.hooks";
-import { HeroProps } from "../../types/Hero.types";
+import { useHero } from "../../../context/HeroContext.hooks";
+import { HeroProps } from "../../../types/Hero.types";
 
 export default function EditHero() {
 	const { data: details, updateData } = useHero();
@@ -90,7 +90,7 @@ export default function EditHero() {
 								<label
 									htmlFor="photo"
 									className="block text-sm font-medium leading-6 text-gray-900">
-									Photo
+									Foto
 								</label>
 								<div className="mt-2 flex items-center gap-x-3">
 									<img
@@ -100,7 +100,7 @@ export default function EditHero() {
 									<label
 										htmlFor="file-upload"
 										className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-										<span>Change</span>
+										<span>Mudar</span>
 										<input
 											id="file-upload"
 											name="file-upload"
