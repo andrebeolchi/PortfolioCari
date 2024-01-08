@@ -1,4 +1,4 @@
-import { collection, doc, getDoc, getDocs, setDoc, updateDoc } from "@firebase/firestore";
+import { collection, deleteDoc, doc, getDoc, getDocs, setDoc, updateDoc } from "@firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "@firebase/storage";
 import { v4 as uuidv4 } from "uuid";
 import { AcademicDetailsProps, AcademicItemProps } from "../types/Academic.types";
@@ -101,6 +101,17 @@ class AcademicApi {
 			};
 
 			await updateDoc(detailsRef, body);
+		} catch (error) {
+			console.log("error", error);
+			throw new Error(error.response.data.error);
+		}
+	}
+
+	async deleteAcademicItem(id: string): Promise<void> {
+		try {
+			const detailsRef = doc(db, "data", "academic-education", "list", id);
+
+			await deleteDoc(detailsRef);
 		} catch (error) {
 			console.log("error", error);
 			throw new Error(error.response.data.error);

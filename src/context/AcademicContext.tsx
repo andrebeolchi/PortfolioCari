@@ -7,8 +7,9 @@ interface AcademicContextProps {
 	data?: AcademicProps;
 	isLoading: boolean;
 	updateData: (data: AcademicDetailsProps) => Promise<void>;
-  createItem: (data: AcademicItemProps) => Promise<void>;
-  updateItem: (data: AcademicItemProps) => Promise<void>;
+	createItem: (data: AcademicItemProps) => Promise<void>;
+	updateItem: (data: AcademicItemProps) => Promise<void>;
+	deleteItem: (id: string) => Promise<void>;
 }
 
 interface AcademicProviderProps {
@@ -22,8 +23,9 @@ export const AcademicContext = createContext<AcademicContextProps>({
 		items: []
 	},
 	updateData: async () => {},
-  createItem: async () => {},
-  updateItem: async () => {},
+	createItem: async () => {},
+	updateItem: async () => {},
+	deleteItem: async () => {},
 	isLoading: true
 });
 
@@ -71,6 +73,16 @@ export const AcademicProvider = ({ children }: AcademicProviderProps) => {
 		}
 	};
 
+	const deleteItem = async (id: string) => {
+		try {
+			await AcademicApi.deleteAcademicItem(id);
+
+			toast.success("Item deletado com sucesso!");
+		} catch (error) {
+			toast.error("Ocorreu um erro ao deletar o item!");
+		}
+	};
+
 	useEffect(() => {
 		getData();
 	}, []);
@@ -78,7 +90,9 @@ export const AcademicProvider = ({ children }: AcademicProviderProps) => {
 	const value = {
 		data,
 		updateData,
-    createItem,
+		createItem,
+		deleteItem,
+		updateItem,
 		isLoading
 	};
 

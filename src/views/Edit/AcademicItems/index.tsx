@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAcademic } from "../../../context/AcademicContext.hooks";
 import { AcademicItemProps } from "../../../types/Academic.types";
 
 export default function EditAcademicItems() {
 	const { id } = useParams<{ id: string }>();
+	const navigate = useNavigate();
 
-	const { data: academicData, updateItem, createItem } = useAcademic();
+	const { data: academicData, updateItem, createItem, deleteItem } = useAcademic();
 
 	const [academic, setAcademic] = useState<AcademicItemProps>({
+		id: id ?? "",
 		title: "",
 		category: "",
 		imageUrl: "",
@@ -22,10 +24,14 @@ export default function EditAcademicItems() {
 		try {
 			if (id === "new") {
 				await createItem(academic);
+
+				navigate("/edit/academic");
 				return;
 			}
 
 			await updateItem(academic);
+
+			navigate("/edit/academic");
 		} catch (error) {
 			console.log("error ", error);
 		}
@@ -48,7 +54,7 @@ export default function EditAcademicItems() {
 	return (
 		<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
 			<form
-				method="POST"
+				method={id === "new" ? "POST" : "PUT"}
 				onSubmit={handleSubmit}>
 				<div className="space-y-12">
 					<div className="border-b border-gray-900/10 pb-12">
@@ -179,11 +185,32 @@ export default function EditAcademicItems() {
 				</div>
 
 				<div className="mt-6 flex items-center justify-end gap-x-6">
-					<button
-						type="submit"
-						className="rounded-md bg-lime-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-lime-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-600">
-						Salvar
-					</button>
+					{id === "new" ? (
+						<button
+							type="submit"
+							className="rounded-md bg-lime-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-lime-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-600">
+							Salvar
+						</button>
+					) : (
+						<>
+							<button
+								type="button"
+								className="text-sm font-semibold leading-6 text-red-600"
+								onClick={async () => {
+									if (window.confirm("Tem certeza que deseja apagar?")) {
+										await deleteItem(id);
+										navigate("/edit/academic");
+									}
+								}}>
+								Apagar
+							</button>
+							<button
+								type="submit"
+								className="rounded-md bg-lime-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-lime-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-600">
+								Save
+							</button>
+						</>
+					)}
 				</div>
 			</form>
 		</div>

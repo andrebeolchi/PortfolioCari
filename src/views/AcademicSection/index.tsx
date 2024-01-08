@@ -31,11 +31,11 @@ export default function AcademicSection() {
 								{post.subtitle && <p className="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">{post.subtitle}</p>}
 							</div>
 							{post.imageUrl && (
-								<div className="mt-8 bg-gray-50 p-4 rounded-lg">
+								<div className="mt-8 bg-gray-50 p-4 rounded-lg w-full">
 									<img
 										src={post.imageUrl}
 										alt=""
-										className="h-auto w-full rounded-lg object-cover"
+										className="h-20 w-full rounded-lg object-contain"
 									/>
 								</div>
 							)}
