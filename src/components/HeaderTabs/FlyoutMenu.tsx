@@ -81,7 +81,7 @@ export default function FlyoutMenu({ menu }: { menu: FlyoutMenuProps }) {
 										<div>
 											<NavLink
 												to={item.href}
-												className="font-semibold text-gray-900">
+												className="font-semibold text-gray-900 z-20">
 												{item.name}
 												<span className="absolute inset-0" />
 											</NavLink>
@@ -95,7 +95,7 @@ export default function FlyoutMenu({ menu }: { menu: FlyoutMenuProps }) {
 									<NavLink
 										key={item.name}
 										to={item.href}
-										className="flex items-center justify-center gap-x-2.5 p-3 font-semibold text-gray-900 hover:bg-gray-100">
+										className="flex items-center justify-center gap-x-2.5 p-3 font-semibold text-gray-900 hover:bg-gray-100 z-20">
 										<item.icon
 											className="h-5 w-5 flex-none text-gray-400"
 											aria-hidden="true"
