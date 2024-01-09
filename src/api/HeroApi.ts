@@ -1,10 +1,10 @@
 import { doc, getDoc, updateDoc } from "@firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "@firebase/storage";
 import { HeroProps } from "../types/Hero.types";
-import { db, storage } from "../utils/firebase";
+import { FirebaseError, db, storage } from "../utils/firebase";
 
 class HeroApi {
-	async getHero(): Promise<HeroProps> {
+	async getHero(): Promise<HeroProps | void> {
 		try {
 			const detailsRef = doc(db, "data", "hero-section");
 
@@ -12,8 +12,9 @@ class HeroApi {
 
 			return docSnap.data() as HeroProps;
 		} catch (error) {
-			console.log("error", error);
-			throw new Error(error.response.data.error);
+			if (error instanceof FirebaseError) {
+				throw new Error(error.message);
+			}
 		}
 	}
 
@@ -42,8 +43,9 @@ class HeroApi {
 
 			return;
 		} catch (error) {
-			console.log("error", error);
-			throw new Error(error.response.data.error);
+			if (error instanceof FirebaseError) {
+				throw new Error(error.message);
+			}
 		}
 	}
 }

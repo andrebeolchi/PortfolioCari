@@ -14,10 +14,10 @@ import {
 import { getDownloadURL, ref, uploadBytes } from "@firebase/storage";
 import { v4 as uuidv4 } from "uuid";
 import { ImagesProps, ProjectsDetailsProps, ProjectsItemProps } from "../types/Projects.types";
-import { db, storage } from "../utils/firebase";
+import { FirebaseError, db, storage } from "../utils/firebase";
 
 class ProjectsApi {
-	async getProjectsDetails(): Promise<ProjectsDetailsProps> {
+	async getProjectsDetails(): Promise<ProjectsDetailsProps | void> {
 		try {
 			const detailsRef = doc(db, "data", "projects");
 
@@ -25,12 +25,13 @@ class ProjectsApi {
 
 			return docSnap.data() as ProjectsDetailsProps;
 		} catch (error) {
-			console.log("error", error);
-			throw new Error(error.response.data.error);
+			if (error instanceof FirebaseError) {
+				throw new Error(error.message);
+			}
 		}
 	}
 
-	async getProjectsList(): Promise<ProjectsItemProps[]> {
+	async getProjectsList(): Promise<ProjectsItemProps[] | void> {
 		try {
 			const ref = collection(db, "data", "projects", "list");
 
@@ -45,8 +46,9 @@ class ProjectsApi {
 
 			return data.docs.map((doc) => doc.data() as ProjectsItemProps);
 		} catch (error) {
-			console.log("error", error);
-			throw new Error(error.response.data.error);
+			if (error instanceof FirebaseError) {
+				throw new Error(error.message);
+			}
 		}
 	}
 
@@ -54,10 +56,16 @@ class ProjectsApi {
 		try {
 			const detailsRef = doc(db, "data", "projects");
 
-			await updateDoc(detailsRef, data);
+			const body = {
+				title: data.title,
+				description: data.description
+			};
+
+			await updateDoc(detailsRef, body);
 		} catch (error) {
-			console.log("error", error);
-			throw new Error(error.response.data.error);
+			if (error instanceof FirebaseError) {
+				throw new Error(error.message);
+			}
 		}
 	}
 
@@ -102,8 +110,9 @@ class ProjectsApi {
 
 			await setDoc(detailsRef, body);
 		} catch (error) {
-			console.log("error", error);
-			throw new Error(error.response.data.error);
+			if (error instanceof FirebaseError) {
+				throw new Error(error.message);
+			}
 		}
 	}
 
@@ -134,7 +143,7 @@ class ProjectsApi {
 							});
 						} else {
 							return images.push({
-								url: inputedImage.url,
+								url: inputedImage.url ?? "",
 								order: inputedImage.order ?? 0,
 								title: inputedImage.title ?? "",
 								id: inputedImage.id
@@ -155,8 +164,9 @@ class ProjectsApi {
 
 			await updateDoc(detailsRef, body);
 		} catch (error) {
-			console.log("error", error);
-			throw new Error(error.response.data.error);
+			if (error instanceof FirebaseError) {
+				throw new Error(error.message);
+			}
 		}
 	}
 
@@ -166,8 +176,9 @@ class ProjectsApi {
 
 			await deleteDoc(detailsRef);
 		} catch (error) {
-			console.log("error", error);
-			throw new Error(error.response.data.error);
+			if (error instanceof FirebaseError) {
+				throw new Error(error.message);
+			}
 		}
 	}
 
@@ -185,8 +196,9 @@ class ProjectsApi {
 
 			await batch.commit();
 		} catch (error) {
-			console.log("error", error);
-			throw new Error(error.response.data.error);
+			if (error instanceof FirebaseError) {
+				throw new Error(error.message);
+			}
 		}
 	}
 }

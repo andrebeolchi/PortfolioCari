@@ -14,10 +14,10 @@ import {
 import { getDownloadURL, ref, uploadBytes } from "@firebase/storage";
 import { v4 as uuidv4 } from "uuid";
 import { AcademicDetailsProps, AcademicItemProps } from "../types/Academic.types";
-import { db, storage } from "../utils/firebase";
+import { FirebaseError, db, storage } from "../utils/firebase";
 
 class AcademicApi {
-	async getAcademicDetails(): Promise<AcademicDetailsProps> {
+	async getAcademicDetails(): Promise<AcademicDetailsProps | void> {
 		try {
 			const detailsRef = doc(db, "data", "academic-education");
 
@@ -25,12 +25,13 @@ class AcademicApi {
 
 			return docSnap.data() as AcademicDetailsProps;
 		} catch (error) {
-			console.log("error", error);
-			throw new Error(error.response.data.error);
+			if (error instanceof FirebaseError) {
+				throw new Error(error.message);
+			}
 		}
 	}
 
-	async getAcademicList(): Promise<AcademicItemProps[]> {
+	async getAcademicList(): Promise<AcademicItemProps[] | void> {
 		try {
 			const ref = collection(db, "data", "academic-education", "list");
 
@@ -40,8 +41,9 @@ class AcademicApi {
 
 			return data.docs.map((doc) => doc.data() as AcademicItemProps);
 		} catch (error) {
-			console.log("error", error);
-			throw new Error(error.response.data.error);
+			if (error instanceof FirebaseError) {
+				throw new Error(error.message);
+			}
 		}
 	}
 
@@ -49,10 +51,16 @@ class AcademicApi {
 		try {
 			const detailsRef = doc(db, "data", "academic-education");
 
-			await updateDoc(detailsRef, data);
+			const body = {
+				title: data.title,
+				description: data.description
+			};
+
+			await updateDoc(detailsRef, body);
 		} catch (error) {
-			console.log("error", error);
-			throw new Error(error.response.data.error);
+			if (error instanceof FirebaseError) {
+				throw new Error(error.message);
+			}
 		}
 	}
 
@@ -68,7 +76,6 @@ class AcademicApi {
 				await uploadBytes(storageRef, item.inputedImage);
 
 				image = await getDownloadURL(storageRef);
-				console.log("image", image);
 			}
 
 			const detailsRef = doc(db, `data/academic-education/list/${newId}`);
@@ -86,11 +93,10 @@ class AcademicApi {
 			};
 
 			await setDoc(detailsRef, body);
-
-			console.log("ref", ref);
 		} catch (error) {
-			console.log("error", error);
-			throw new Error(error.response.data.error);
+			if (error instanceof FirebaseError) {
+				throw new Error(error.message);
+			}
 		}
 	}
 
@@ -104,7 +110,6 @@ class AcademicApi {
 				await uploadBytes(storageRef, item.inputedImage);
 
 				image = await getDownloadURL(storageRef);
-				console.log("image", image);
 			}
 
 			const detailsRef = doc(db, "data", "academic-education", "list", item.id);
@@ -119,8 +124,9 @@ class AcademicApi {
 
 			await updateDoc(detailsRef, body);
 		} catch (error) {
-			console.log("error", error);
-			throw new Error(error.response.data.error);
+			if (error instanceof FirebaseError) {
+				throw new Error(error.message);
+			}
 		}
 	}
 
@@ -130,8 +136,9 @@ class AcademicApi {
 
 			await deleteDoc(detailsRef);
 		} catch (error) {
-			console.log("error", error);
-			throw new Error(error.response.data.error);
+			if (error instanceof FirebaseError) {
+				throw new Error(error.message);
+			}
 		}
 	}
 
@@ -149,8 +156,9 @@ class AcademicApi {
 
 			await batch.commit();
 		} catch (error) {
-			console.log("error", error);
-			throw new Error(error.response.data.error);
+			if (error instanceof FirebaseError) {
+				throw new Error(error.message);
+			}
 		}
 	}
 }
