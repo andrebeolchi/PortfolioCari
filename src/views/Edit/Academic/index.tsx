@@ -91,70 +91,74 @@ export default function EditAcademic() {
 						</div>
 					</div>
 
-					<div className="border-b border-gray-900/10 pb-12">
-						<h2 className="text-base font-semibold leading-7 text-gray-900">Ordenação das Formações</h2>
-						<p className="mt-1 text-sm leading-6 text-gray-600">Altere a ordem de exibição das formações acadêmicas.</p>
+					{items.length > 0 && (
+						<div className="border-b border-gray-900/10 pb-12">
+							<h2 className="text-base font-semibold leading-7 text-gray-900">Ordenação das Formações</h2>
+							<p className="mt-1 text-sm leading-6 text-gray-600">
+								Altere a ordem de exibição das formações acadêmicas.
+							</p>
 
-						<div className="mt-10 space-y-10">
-							<fieldset>
-								<legend className="text-sm font-semibold leading-6 text-gray-900 sr-only">Formações</legend>
-								<div className="mt-6 space-y-6">
-									{items.map((item, index) => (
-										<div
-											key={item.id}
-											className="flex items-center justify-between">
-											<div className="flex items-center gap-x-3">
-												<img
-													className="h-10 w-10 object-contain "
-													src={item.image}
-													alt={item.title}
-												/>
-												<div>
-													<h3 className="text-sm font-medium leading-6 text-gray-900">{item.title}</h3>
-													<p className="text-sm leading-5 text-gray-500">{item.subtitle}</p>
+							<div className="mt-10 space-y-10">
+								<fieldset>
+									<legend className="text-sm font-semibold leading-6 text-gray-900 sr-only">Formações</legend>
+									<div className="mt-6 space-y-6">
+										{items.map((item, index) => (
+											<div
+												key={item.id}
+												className="flex items-center justify-between">
+												<div className="flex items-center gap-x-3">
+													<img
+														className="h-10 w-10 object-contain "
+														src={item.image}
+														alt={item.title}
+													/>
+													<div>
+														<h3 className="text-sm font-medium leading-6 text-gray-900">{item.title}</h3>
+														<p className="text-sm leading-5 text-gray-500">{item.subtitle}</p>
+													</div>
+												</div>
+
+												<div className="flex items-center gap-x-3">
+													{index < items?.length - 1 && (
+														<button
+															type="button"
+															className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+															onClick={() => {
+																const newItems = [...items];
+																const itemToMove = newItems[index];
+																newItems[index] = newItems[index + 1];
+																newItems[index + 1] = itemToMove;
+																newItems[index + 1].order = index + 1;
+																newItems[index].order = index;
+																setItems(newItems);
+															}}>
+															<ArrowDownIcon className="h-5 w-5" />
+														</button>
+													)}
+													{index > 0 && (
+														<button
+															type="button"
+															className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+															onClick={() => {
+																const newItems = [...items];
+																const itemToMove = newItems[index];
+																newItems[index] = newItems[index - 1];
+																newItems[index - 1] = itemToMove;
+																newItems[index - 1].order = index - 1;
+																newItems[index].order = index;
+																setItems(newItems);
+															}}>
+															<ArrowUpIcon className="h-5 w-5" />
+														</button>
+													)}
 												</div>
 											</div>
-
-											<div className="flex items-center gap-x-3">
-												{index < items?.length - 1 && (
-													<button
-														type="button"
-														className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-														onClick={() => {
-															const newItems = [...items];
-															const itemToMove = newItems[index];
-															newItems[index] = newItems[index + 1];
-															newItems[index + 1] = itemToMove;
-															newItems[index + 1].order = index + 1;
-															newItems[index].order = index;
-															setItems(newItems);
-														}}>
-														<ArrowDownIcon className="h-5 w-5" />
-													</button>
-												)}
-												{index > 0 && (
-													<button
-														type="button"
-														className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-														onClick={() => {
-															const newItems = [...items];
-															const itemToMove = newItems[index];
-															newItems[index] = newItems[index - 1];
-															newItems[index - 1] = itemToMove;
-															newItems[index - 1].order = index - 1;
-															newItems[index].order = index;
-															setItems(newItems);
-														}}>
-														<ArrowUpIcon className="h-5 w-5" />
-													</button>
-												)}
-											</div>
-										</div>
-									))}
-								</div>
-							</fieldset>
+										))}
+									</div>
+								</fieldset>
+							</div>
 						</div>
-					</div>
+					)}
 				</div>
 
 				<div className="mt-6 flex items-center justify-end gap-x-6">
