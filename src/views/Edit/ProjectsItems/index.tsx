@@ -1,4 +1,4 @@
-import { ArrowDownIcon, ArrowUpIcon } from "@heroicons/react/20/solid";
+import { ArrowDownIcon, ArrowUpIcon, TrashIcon } from "@heroicons/react/20/solid";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useProjects } from "../../../context/ProjectsContext.hooks";
@@ -36,14 +36,9 @@ export default function EditProjectsItems() {
 					...projects,
 					inputedImages
 				});
-
-				console.log("projects ", projects);
-
-				// navigate("/edit/projects");
-				return;
+			} else {
+				await updateItem({ ...projects, inputedImages });
 			}
-
-			await updateItem(projects);
 
 			navigate("/edit/projects");
 		} catch (error) {
@@ -57,6 +52,10 @@ export default function EditProjectsItems() {
 
 			if (item) {
 				setProjects(item);
+
+				if (item.images.length > 0) {
+					setInputedImages(item.images);
+				}
 			}
 		}
 	}, [projectsData, id]);
@@ -178,77 +177,91 @@ export default function EditProjectsItems() {
 							</div>
 						</div>
 
-						{inputedImages.map((item, index) => (
-							<div
-								key={index}
-								className="flex items-center justify-between p-8 bg-gray-50 my-2 rounded-lg">
-								<div className="flex flex-1 items-center gap-x-3">
-									<div>
-										<h3 className="text-xl font-medium leading-6 text-gray-900 mr-4">{(item.order ?? 0) + 1}</h3>
-									</div>
-									<img
-										className="h-10 w-10 object-contain "
-										src={URL.createObjectURL(item)}
-									/>
-									<div className="w-full">
-										<input
-											type="text"
-											name="title"
-											id="title"
-											autoComplete="title"
-											className="block flex-1 border-0 bg-transparent py-1.5 pl-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
-											placeholder="Ex: Foto da fachada vista de cima"
-											onChange={(event) => {
-												const newItems = [...inputedImages];
-												newItems[index].title = event.target.value;
-												setInputedImages(newItems);
-											}}
-											value={item.title || ""}
+						{inputedImages
+							?.sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+							.map((item, index) => (
+								<div
+									key={index}
+									className="flex items-center justify-between p-8 bg-gray-50 my-2 rounded-lg">
+									<div className="flex flex-1 items-center gap-x-3">
+										<div>
+											<h3 className="text-xl font-medium leading-6 text-gray-900 mr-4">{(item.order ?? 0) + 1}</h3>
+										</div>
+										<img
+											className="h-10 w-10 object-contain "
+											src={item?.name ? URL.createObjectURL(item) : item?.url}
 										/>
+										<div className="w-full">
+											<input
+												type="text"
+												name="title"
+												id="title"
+												autoComplete="title"
+												className="block flex-1 border-0 bg-transparent py-1.5 pl-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
+												placeholder="Ex: Foto da fachada vista de cima"
+												onChange={(event) => {
+													const newItems = [...inputedImages];
+													newItems[index].title = event.target.value;
+													setInputedImages(newItems);
+												}}
+												value={item.title || ""}
+											/>
+										</div>
+									</div>
+
+									<div className="flex items-center gap-x-3">
+										{index > 0 ? (
+											<button
+												type="button"
+												className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+												onClick={() => {
+													const newItems = [...inputedImages];
+													const itemToMove = newItems[index];
+													newItems[index] = newItems[index - 1];
+													newItems[index - 1] = itemToMove;
+													newItems[index - 1].order = index - 1;
+													newItems[index].order = index;
+													setInputedImages(newItems);
+												}}>
+												<ArrowUpIcon className="h-5 w-5" />
+											</button>
+										) : (
+											<InvisibleButton />
+										)}
+
+										{index < inputedImages?.length - 1 ? (
+											<button
+												type="button"
+												className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+												onClick={() => {
+													const newItems = [...inputedImages];
+													const itemToMove = newItems[index];
+													newItems[index] = newItems[index + 1];
+													newItems[index + 1] = itemToMove;
+													newItems[index + 1].order = index + 1;
+													newItems[index].order = index;
+													setInputedImages(newItems);
+												}}>
+												<ArrowDownIcon className="h-5 w-5" />
+											</button>
+										) : (
+											<InvisibleButton />
+										)}
+
+										<button
+											type="button"
+											className="rounded-md px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 bg-red-400/10"
+											onClick={() => {
+												// remove item from inputedImages
+												const newItems = [...inputedImages];
+												newItems.splice(index, 1);
+												setInputedImages(newItems);
+											}}>
+											<TrashIcon className="h-5 w-5 text-red-600" />
+										</button>
 									</div>
 								</div>
-
-								<div className="flex items-center gap-x-3">
-									{index > 0 ? (
-										<button
-											type="button"
-											className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-											onClick={() => {
-												const newItems = [...inputedImages];
-												const itemToMove = newItems[index];
-												newItems[index] = newItems[index - 1];
-												newItems[index - 1] = itemToMove;
-												newItems[index - 1].order = index - 1;
-												newItems[index].order = index;
-												setInputedImages(newItems);
-											}}>
-											<ArrowUpIcon className="h-5 w-5" />
-										</button>
-									) : (
-										<InvisibleButton />
-									)}
-
-									{index < inputedImages?.length - 1 ? (
-										<button
-											type="button"
-											className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-											onClick={() => {
-												const newItems = [...inputedImages];
-												const itemToMove = newItems[index];
-												newItems[index] = newItems[index + 1];
-												newItems[index + 1] = itemToMove;
-												newItems[index + 1].order = index + 1;
-												newItems[index].order = index;
-												setInputedImages(newItems);
-											}}>
-											<ArrowDownIcon className="h-5 w-5" />
-										</button>
-									) : (
-										<InvisibleButton />
-									)}
-								</div>
-							</div>
-						))}
+							))}
 					</div>
 				</div>
 

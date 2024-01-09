@@ -1,11 +1,13 @@
 import { AcademicCapIcon, FolderPlusIcon, PencilIcon } from "@heroicons/react/20/solid";
 import HeaderTabs from "../../components/HeaderTabs";
 import { useAcademic } from "../../context/AcademicContext.hooks";
+import { useProjects } from "../../context/ProjectsContext.hooks";
 
 export default function EditPage({ children }: { children: React.ReactNode }) {
 	const { data: academicData } = useAcademic();
+	const { data: projectsData } = useProjects();
 
-	if (!academicData) {
+	if (!academicData || !projectsData) {
 		return null;
 	}
 
@@ -44,11 +46,11 @@ export default function EditPage({ children }: { children: React.ReactNode }) {
 					},
 					{
 						name: "Projetos",
-						submenus: []?.map((item) => ({
+						submenus: projectsData.items?.map((item) => ({
 							name: item.title,
-							description: item.category,
-							imageUrl: item.imageUrl,
-							href: `/edit/academic/${item?.id}`
+							description: item.subtitle,
+							imageUrl: item.images[0]?.url,
+							href: `/edit/projects/${item?.id}`
 						})),
 						callsToAction: [
 							{

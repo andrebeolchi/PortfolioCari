@@ -1,11 +1,13 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
+const withMT = require("@material-tailwind/react/utils/withMT");
 
-/** @type {import('tailwindcss').Config} */
-export default {
+
+module.exports = withMT({
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
-    "./node_modules/flowbite/**/*.js"
+    "./node_modules/flowbite/**/*.js",
+    'node_modules/flowbite-react/lib/esm/**/*.js'
   ],
   theme: {
     extend: {
@@ -16,7 +18,5 @@ export default {
   },
   plugins: [
     require('@tailwindcss/forms'),
-    require('flowbite/plugin')
   ],
-}
-
+})

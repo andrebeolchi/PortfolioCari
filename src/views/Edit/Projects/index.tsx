@@ -105,8 +105,8 @@ export default function EditProjects() {
 											className="flex items-center justify-between">
 											<div className="flex items-center gap-x-3">
 												<img
-													className="h-10 w-10 object-contain "
-													src={item.imageUrl}
+													className="h-10 w-10 object-contain"
+													src={item.images[0]?.url}
 													alt={item.title}
 												/>
 												<div>

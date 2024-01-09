@@ -13,7 +13,7 @@ import {
 } from "@firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "@firebase/storage";
 import { v4 as uuidv4 } from "uuid";
-import { ProjectsDetailsProps, ProjectsItemProps } from "../types/Projects.types";
+import { ProjectsDetailsProps, ProjectsItemProps, ImagesProps } from "../types/Projects.types";
 import { db, storage } from "../utils/firebase";
 
 class ProjectsApi {
@@ -109,26 +109,49 @@ class ProjectsApi {
 
 	async updateProjectsItem(item: ProjectsItemProps): Promise<void> {
 		try {
-			let imageUrl = item.imageUrl;
+			const images: ImagesProps[] = [];
 
-			if (item.inputedImage) {
-				const storageRef = ref(storage, `projects/${item.id}`);
+			if (item.inputedImages && item.inputedImages?.length > 0) {
+				console.log("item.inputedImages", item.inputedImages);
 
-				await uploadBytes(storageRef, item.inputedImage);
+				await Promise.all(
+					item.inputedImages?.map(async (inputedImage) => {
+						console.log("inputedImage", inputedImage);
 
-				imageUrl = await getDownloadURL(storageRef);
-				console.log("imageUrl", imageUrl);
+						if (!inputedImage?.id) {
+							const imageId = uuidv4();
+							const storageRef = ref(storage, `projects/${item.id}/${imageId}`);
+
+							await uploadBytes(storageRef, inputedImage);
+
+							const imageUrl = await getDownloadURL(storageRef);
+
+							return images.push({
+								url: imageUrl,
+								order: inputedImage.order ?? 0,
+								title: inputedImage.title ?? "",
+								id: imageId
+							});
+						} else {
+							return images.push({
+								url: inputedImage.url,
+								order: inputedImage.order ?? 0,
+								title: inputedImage.title ?? "",
+								id: inputedImage.id
+							});
+						}
+					})
+				);
 			}
-
-			const detailsRef = doc(db, "data", "projects", "list", item.id);
 
 			const body = {
 				title: item.title,
 				subtitle: item.subtitle,
-				imageUrl,
-				category: item.category,
-				date: item.date
+				images,
+				description: item.description
 			};
+
+			const detailsRef = doc(db, `data/projects/list/${item.id}`);
 
 			await updateDoc(detailsRef, body);
 		} catch (error) {

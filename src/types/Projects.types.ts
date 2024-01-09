@@ -15,15 +15,15 @@ export interface ProjectsItemProps {
 	order: number;
 }
 
-export type InputImage = File & { order?: number; title?: string };
+export type InputImage = File & { order?: number; title?: string; id?: string; url?: string };
 
-interface BulletProps {
+export interface BulletProps {
 	icon: string;
 	title: string;
 	description: string;
 }
 
-interface ImagesProps {
+export interface ImagesProps {
 	url: string;
 	title: string;
 	order: number;

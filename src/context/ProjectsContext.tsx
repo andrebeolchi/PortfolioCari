@@ -69,7 +69,7 @@ export const ProjectsProvider = ({ children }: ProjectsProviderProps) => {
 	const updateItem = async (data: ProjectsItemProps) => {
 		try {
 			await ProjectsApi.updateProjectsItem(data);
-			toast.success("Item criado com sucesso!");
+			toast.success("Item atualizado com sucesso!");
 		} catch (error) {
 			toast.error("Ocorreu um erro ao atualizar os dados!");
 		}
