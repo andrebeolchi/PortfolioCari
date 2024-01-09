@@ -1,28 +1,43 @@
 import HeaderTabs from "../../components/HeaderTabs";
+import { useAcademic } from "../../context/AcademicContext.hooks";
 import { useHero } from "../../context/HeroContext.hooks";
+import { useProjects } from "../../context/ProjectsContext.hooks";
 
 export default function HeroSection() {
 	const { data: details } = useHero();
+	const { data: projects } = useProjects();
+	const { data: academic } = useAcademic();
+
+	const tabs = [];
+
+	if (academic && academic?.items.length > 0) {
+		tabs.push({
+			name: "Formação",
+			href: "#"
+		});
+	}
+
+	if (projects && projects?.items.length > 0) {
+		tabs.push({
+			name: "Projetos",
+			href: "#",
+			submenus: projects?.items.map((project) => ({
+				name: project.title,
+				description: project.description,
+				image: project.images[0].url,
+				to: project.id
+			}))
+		});
+	}
+
+	tabs.push({
+		name: "Contato",
+		href: "#"
+	});
 
 	return (
 		<div className="bg-white">
-			<HeaderTabs
-				tabs={[
-					{
-						name: "Formação",
-						href: "#"
-					},
-					{
-						name: "Projetos",
-						href: "#"
-					},
-					{
-						name: "Contato",
-						href: "#"
-					}
-				]}
-			/>
-
+			<HeaderTabs tabs={tabs} />
 			<div className="relative isolate px-6 pt-14 lg:px-8">
 				<div
 					className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
@@ -41,12 +56,12 @@ export default function HeroSection() {
 						<p className="mt-6 text-lg leading-8 text-gray-600">{details?.subtitle}</p>
 						<div className="mt-10 flex items-center justify-center gap-x-6">
 							<a
-								href="#"
+								href="#" // Scroll to the contact section
 								className="rounded-md bg-lime-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-lime-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-500 transition ease-in-out">
 								Contato
 							</a>
 							<a
-								href="#"
+								href="#" // Scroll to the projects section
 								className="text-sm font-semibold leading-6 text-gray-900">
 								Ver mais <span aria-hidden="true">→</span>
 							</a>
