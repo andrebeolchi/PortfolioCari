@@ -1,6 +1,8 @@
+import { InputImage } from "./Projects.types";
+
 export interface HeroProps {
 	title: string;
 	subtitle: string;
-	inputedImage?: Blob | Uint8Array | ArrayBuffer;
+	inputedImage?: InputImage;
 	image: string;
 }

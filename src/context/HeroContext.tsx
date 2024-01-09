@@ -24,7 +24,11 @@ export const HeroContext = createContext<HeroContextProps>({
 });
 
 export const HeroProvider = ({ children }: HeroProviderProps) => {
-	const [data, setData] = useState<HeroProps>();
+	const [data, setData] = useState<HeroProps>({
+		title: "",
+		subtitle: "",
+		image: ""
+	});
 	const [isLoading, setIsLoading] = useState<boolean>(true);
 
 	const getData = async () => {
@@ -39,8 +43,6 @@ export const HeroProvider = ({ children }: HeroProviderProps) => {
 
 	const updateData = async (data: HeroProps) => {
 		try {
-			console.log("data ", data);
-
 			await HeroApi.updateHero(data);
 			toast.success("Dados atualizados com sucesso!");
 		} catch (error) {
@@ -52,11 +54,14 @@ export const HeroProvider = ({ children }: HeroProviderProps) => {
 		getData();
 	}, []);
 
-	const value = {
-		data,
-		updateData,
-		isLoading
-	};
-
-	return <HeroContext.Provider value={value}>{children}</HeroContext.Provider>;
+	return (
+		<HeroContext.Provider
+			value={{
+				data,
+				updateData,
+				isLoading
+			}}>
+			{children}
+		</HeroContext.Provider>
+	);
 };
