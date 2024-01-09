@@ -1,27 +1,18 @@
-import { Carousel, IconButton } from "@material-tailwind/react";
+import { Carousel, Dialog, DialogBody, IconButton } from "@material-tailwind/react";
+import { useState } from "react";
 import { useProjects } from "../context/ProjectsContext.hooks";
-
-const features = [
-	// {
-	// 	name: "Push to deploy.",
-	// 	description:
-	// 		"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.",
-	// 	icon: CloudArrowUpIcon
-	// },
-	// {
-	// 	name: "SSL certificates.",
-	// 	description: "Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.",
-	// 	icon: LockClosedIcon
-	// },
-	// {
-	// 	name: "Database backups.",
-	// 	description: "Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.",
-	// 	icon: ServerIcon
-	// }
-];
+import { ImagesProps } from "../types/Projects.types";
 
 export default function ProjectsSection() {
 	const { data: projectsData } = useProjects();
+
+	const [selectedImage, setSelectedImage] = useState<ImagesProps | null>(null);
+
+	const handleOpen = () => {
+		if (selectedImage) {
+			setSelectedImage(null);
+		}
+	};
 
 	if (!projectsData) {
 		return null;
@@ -71,6 +62,7 @@ export default function ProjectsSection() {
 							<div className="flex w-full sm:w-[32rem] rounded-xl md:-ml-4 lg:-ml-0 place-self-center bg-gray-50 p-4 border-gray-900/10 border shadow-sm">
 								<Carousel
 									autoplay={true}
+									loop={true}
 									className="rounded-xl"
 									placeholder={item?.title}
 									prevArrow={({ handlePrev }) =>
@@ -148,6 +140,7 @@ export default function ProjectsSection() {
 												className="w-full sm:w-[32rem] h-[20rem] sm:h-[32rem] object-contain"
 												width={2432}
 												height={1442}
+												onClick={() => setSelectedImage(image)}
 											/>
 										))}
 								</Carousel>
@@ -156,6 +149,21 @@ export default function ProjectsSection() {
 					);
 				})}
 			</div>
+			<Dialog
+				placeholder={""}
+				open={selectedImage !== null && selectedImage?.url}
+				handler={handleOpen}>
+				<DialogBody
+					placeholder={""}
+					className="flex justify-center">
+					<img
+						key={selectedImage?.id}
+						src={selectedImage?.url}
+						alt={selectedImage?.title}
+						className="w-full h-auto sm:h-auto max-h-[80vh] object-contain"
+					/>
+				</DialogBody>
+			</Dialog>
 		</div>
 	);
 }
