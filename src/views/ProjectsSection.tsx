@@ -35,14 +35,14 @@ export default function ProjectsSection() {
 					<p className="mt-2 text-lg leading-8 text-gray-600">{projectsData.description}</p>
 				</div>
 			</div>
-			<div className="mx-auto mt-10 max-w-7xl px-6 lg:px-8 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16">
+			<div className="mx-auto mt-10 max-w-7xl px-6 lg:px-8 border-t border-gray-200 sm:mt-16">
 				{projectsData.items?.map((item, index) => {
 					const isEven = index % 2 === 0;
 					const isLeft = isEven ? "lg:pr-8" : "lg:pl-8";
 
 					return (
 						<div
-							className={`min-h-screen mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2 border-b pt-8 pb-8 lg:pb-0`}>
+							className={`mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2 border-b py-32`}>
 							<div className={`lg:pt-4 ${isEven && "lg:order-last"} ${isLeft}`}>
 								<div className="lg:max-w-lg">
 									<h2 className="text-base font-semibold leading-7 text-lime-600 uppercase tracking-wider">
@@ -68,7 +68,7 @@ export default function ProjectsSection() {
 									</dl>
 								</div>
 							</div>
-							<div className="flex w-[32rem] rounded-xl shadow-xl ring-1 ring-gray-400/10 md:-ml-4 lg:-ml-0 place-self-center">
+							<div className="flex w-full sm:w-[32rem] rounded-xl md:-ml-4 lg:-ml-0 place-self-center bg-gray-50 p-4 border-gray-900/10 border shadow-sm">
 								<Carousel
 									autoplay={true}
 									className="rounded-xl"
@@ -125,12 +125,12 @@ export default function ProjectsSection() {
 									}
 									navigation={({ setActiveIndex, activeIndex, length }) =>
 										item.images.length > 1 && (
-											<div className="absolute bottom-0 left-2/4 z-50 flex -translate-x-2/4 gap-2">
+											<div className="absolute bottom-2 left-2/4 z-50 flex -translate-x-2/4 gap-2">
 												{new Array(length).fill("").map((_, i) => (
 													<span
 														key={i}
 														className={`block h-1 cursor-pointer rounded-2xl transition-all content-[''] ${
-															activeIndex === i ? "w-8 bg-lime-600" : "w-4 bg-white/50"
+															activeIndex === i ? "w-8 bg-lime-600" : "w-4 bg-gray-400/90"
 														}`}
 														onClick={() => setActiveIndex(i)}
 													/>
@@ -145,7 +145,7 @@ export default function ProjectsSection() {
 												key={image?.id}
 												src={image?.url}
 												alt={image?.title}
-												className="w-[32rem] h-[32rem] object-contain"
+												className="w-full sm:w-[32rem] h-[20rem] sm:h-[32rem] object-contain"
 												width={2432}
 												height={1442}
 											/>
