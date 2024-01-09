@@ -45,7 +45,7 @@ export default function EditPage({ children }: { children: React.ReactNode }) {
 						]
 					},
 					{
-						name: "Projetos",
+						name: projectsData.title,
 						submenus: projectsData.items?.map((item) => ({
 							name: item.title,
 							description: item.subtitle,
