@@ -3,6 +3,10 @@ import { useAcademic } from "../../context/AcademicContext.hooks";
 export default function AcademicSection() {
 	const { data } = useAcademic();
 
+	if (!data || !data.items.length) {
+		return null;
+	}
+
 	return (
 		<div className="bg-white py-24 sm:py-32">
 			<div className="mx-auto max-w-7xl px-6 lg:px-8">

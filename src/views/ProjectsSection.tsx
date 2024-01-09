@@ -14,7 +14,7 @@ export default function ProjectsSection() {
 		}
 	};
 
-	if (!projectsData) {
+	if (!projectsData || !projectsData.items.length) {
 		return null;
 	}
 
