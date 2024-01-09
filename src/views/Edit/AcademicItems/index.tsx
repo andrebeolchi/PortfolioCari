@@ -15,7 +15,8 @@ export default function EditAcademicItems() {
 		category: "",
 		image: "",
 		date: "",
-		subtitle: ""
+		subtitle: "",
+		order: 0
 	});
 
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -157,7 +158,7 @@ export default function EditAcademicItems() {
 											name="file-upload"
 											type="file"
 											className="sr-only"
-											onChange={(event) => setAcademic({ ...academic, inputedImage: event.target.files[0] })}
+											onChange={(event) => setAcademic({ ...academic, inputedImage: event.target.files?.[0] })}
 										/>
 									</label>
 								</div>
@@ -197,7 +198,7 @@ export default function EditAcademicItems() {
 								type="button"
 								className="text-sm font-semibold leading-6 text-red-600"
 								onClick={async () => {
-									if (window.confirm("Tem certeza que deseja apagar?")) {
+									if (id && window.confirm("Tem certeza que deseja apagar?")) {
 										await deleteItem(id);
 										navigate("/edit/academic");
 									}

@@ -43,7 +43,7 @@ export const ProjectsProvider = ({ children }: ProjectsProviderProps) => {
 		setData({
 			title: details?.title ?? "",
 			description: details?.description ?? "",
-			items: list
+			items: list ?? []
 		});
 		setIsLoading(false);
 	};

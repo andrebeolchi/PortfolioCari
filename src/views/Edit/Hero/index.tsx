@@ -11,7 +11,7 @@ export default function EditHero() {
 	const [title, setTitle] = useState<HeroProps["title"]>("");
 	const [subtitle, setSubtitle] = useState<HeroProps["subtitle"]>("");
 	const [image, setImage] = useState<string>("");
-	const [inputedImage, setInputedImage] = useState<InputImage | null>(null);
+	const [inputedImage, setInputedImage] = useState<InputImage | undefined>(undefined);
 
 	useEffect(() => {
 		setTitle(details?.title ?? "");
@@ -107,7 +107,7 @@ export default function EditHero() {
 											name="file-upload"
 											type="file"
 											className="sr-only"
-											onChange={(event) => setInputedImage(event.target.files[0])}
+											onChange={(event) => setInputedImage(event.target.files?.[0] ?? undefined)}
 										/>
 									</label>
 								</div>

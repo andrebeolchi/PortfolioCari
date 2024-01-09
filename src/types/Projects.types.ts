@@ -1,3 +1,5 @@
+import { ElementType } from "react";
+
 export interface ProjectsDetailsProps {
 	title: string;
 	description: string;
@@ -18,7 +20,7 @@ export interface ProjectsItemProps {
 export type InputImage = File & { order?: number; title?: string; id?: string; url?: string };
 
 export interface BulletProps {
-	icon: string;
+	icon: ElementType;
 	title: string;
 	description: string;
 }

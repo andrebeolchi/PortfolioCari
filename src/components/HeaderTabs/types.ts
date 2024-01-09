@@ -1,3 +1,5 @@
+import { ElementType } from "react";
+
 export interface FlyoutMenuProps {
 	name: string;
 	href?: string;
@@ -16,11 +18,6 @@ export interface SubmenuProps {
 	href?: string;
 	onClick?: () => void;
 	image?: string;
-	icon?: React.ForwardRefExoticComponent<
-		React.PropsWithoutRef<React.SVGProps<SVGSVGElement>> & {
-			title?: string;
-			titleId?: string;
-		} & React.RefAttributes<SVGSVGElement>
-	>;
+	icon?: ElementType;
 	description: string;
 }

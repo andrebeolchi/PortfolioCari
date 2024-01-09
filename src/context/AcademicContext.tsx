@@ -40,11 +40,13 @@ export const AcademicProvider = ({ children }: AcademicProviderProps) => {
 
 		const [details, list] = await Promise.all([AcademicApi.getAcademicDetails(), AcademicApi.getAcademicList()]);
 
-		setData({
-			title: details.title,
-			description: details.description,
-			items: list
-		});
+		if (details && list) {
+			setData({
+				title: details.title ?? "",
+				description: details.description ?? "",
+				items: list ?? []
+			});
+		}
 		setIsLoading(false);
 	};
 

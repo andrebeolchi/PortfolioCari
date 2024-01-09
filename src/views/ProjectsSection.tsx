@@ -153,7 +153,7 @@ export default function ProjectsSection() {
 			</div>
 			<Dialog
 				placeholder={""}
-				open={selectedImage !== null && selectedImage?.url}
+				open={Boolean(selectedImage !== null && selectedImage?.url)}
 				handler={handleOpen}>
 				<DialogBody
 					placeholder={""}

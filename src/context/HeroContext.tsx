@@ -35,9 +35,10 @@ export const HeroProvider = ({ children }: HeroProviderProps) => {
 		setIsLoading(true);
 		const response = await HeroApi.getHero();
 
-		console.log("res ", response);
+		if (response) {
+			setData(response);
+		}
 
-		setData(response);
 		setIsLoading(false);
 	};
 

@@ -54,7 +54,7 @@ export default function EditProjectsItems() {
 				setProjects(item);
 
 				if (item.images.length > 0) {
-					setInputedImages(item.images);
+					setInputedImages(item.images as InputImage[]);
 				}
 			}
 		}
@@ -278,7 +278,7 @@ export default function EditProjectsItems() {
 								type="button"
 								className="text-sm font-semibold leading-6 text-red-600"
 								onClick={async () => {
-									if (window.confirm("Tem certeza que deseja apagar?")) {
+									if (id && window.confirm("Tem certeza que deseja apagar?")) {
 										await deleteItem(id);
 										navigate("/edit/projects");
 									}

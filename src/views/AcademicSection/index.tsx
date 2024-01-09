@@ -36,10 +36,10 @@ export default function AcademicSection() {
 							</div>
 							<div className="group relative">
 								<h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-									<a href={post.href}>
+									<span>
 										<span className="absolute inset-0" />
 										{post.title}
-									</a>
+									</span>
 								</h3>
 								{post.subtitle && <p className="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">{post.subtitle}</p>}
 							</div>
