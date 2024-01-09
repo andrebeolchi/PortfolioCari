@@ -5,7 +5,7 @@ export interface FlyoutMenuProps {
 	emptyState?: {
 		title: string;
 		description: string;
-		imageUrl?: string;
+		image?: string;
 	};
 	callsToAction?: Omit<SubmenuProps, "description">[];
 	onClick?: () => void;
@@ -15,7 +15,7 @@ export interface SubmenuProps {
 	name: string;
 	href?: string;
 	onClick?: () => void;
-	imageUrl?: string;
+	image?: string;
 	icon?: React.ForwardRefExoticComponent<
 		React.PropsWithoutRef<React.SVGProps<SVGSVGElement>> & {
 			title?: string;

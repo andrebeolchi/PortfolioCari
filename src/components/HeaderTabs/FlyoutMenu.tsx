@@ -71,10 +71,10 @@ export default function FlyoutMenu({ menu }: { menu: FlyoutMenuProps }) {
 													aria-hidden="true"
 												/>
 											) : (
-												item.imageUrl && (
+												item.image && (
 													<img
 														className="h-8 w-8 flex-none text-gray-400 object-contain"
-														src={item.imageUrl}
+														src={item.image}
 														aria-hidden="true"
 													/>
 												)

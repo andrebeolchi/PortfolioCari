@@ -12,7 +12,7 @@ export default function Footer() {
 							href="/"
 							className="flex items-center">
 							<img
-								src={data?.imageUrl}
+								src={data?.image}
 								className="h-8 me-3"
 								alt="FlowBite Logo"
 							/>

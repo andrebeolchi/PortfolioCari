@@ -17,7 +17,7 @@ export const HeroContext = createContext<HeroContextProps>({
 	data: {
 		title: "",
 		subtitle: "",
-    imageUrl: "",
+		image: ""
 	},
 	updateData: async () => {},
 	isLoading: true
@@ -39,6 +39,8 @@ export const HeroProvider = ({ children }: HeroProviderProps) => {
 
 	const updateData = async (data: HeroProps) => {
 		try {
+			console.log("data ", data);
+
 			await HeroApi.updateHero(data);
 			toast.success("Dados atualizados com sucesso!");
 		} catch (error) {

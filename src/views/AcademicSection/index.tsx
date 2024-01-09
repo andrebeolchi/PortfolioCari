@@ -15,10 +15,10 @@ export default function AcademicSection() {
 						<article
 							key={post.id}
 							className="flex max-w-xl flex-col items-start justify-between">
-							{post.imageUrl && (
+							{post.image && (
 								<div className="mb-8 bg-gray-50 p-4 rounded-xl w-full border-gray-900/10  border shadow-sm">
 									<img
-										src={post.imageUrl}
+										src={post.image}
 										alt=""
 										className="h-48 w-full rounded-lg object-contain"
 									/>

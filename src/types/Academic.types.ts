@@ -8,7 +8,7 @@ export interface AcademicItemProps {
 	title: string;
 	subtitle: string;
 	inputedImage?: Blob | Uint8Array | ArrayBuffer;
-	imageUrl: string;
+	image: string;
 	date: string;
 	category: string;
 	order: number;

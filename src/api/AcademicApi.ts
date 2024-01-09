@@ -60,15 +60,15 @@ class AcademicApi {
 		try {
 			const newId = uuidv4();
 
-			let imageUrl = item.imageUrl;
+			let image = item.image;
 
 			if (item.inputedImage) {
 				const storageRef = ref(storage, `academic/${newId}`);
 
 				await uploadBytes(storageRef, item.inputedImage);
 
-				imageUrl = await getDownloadURL(storageRef);
-				console.log("imageUrl", imageUrl);
+				image = await getDownloadURL(storageRef);
+				console.log("image", image);
 			}
 
 			const detailsRef = doc(db, `data/academic-education/list/${newId}`);
@@ -79,7 +79,7 @@ class AcademicApi {
 				id: newId,
 				title: item.title,
 				subtitle: item.subtitle,
-				imageUrl,
+				image,
 				category: item.category,
 				date: item.date,
 				order: (snapshot.data().count ?? 0) + 1
@@ -96,15 +96,15 @@ class AcademicApi {
 
 	async updateAcademicItem(item: AcademicItemProps): Promise<void> {
 		try {
-			let imageUrl = item.imageUrl;
+			let image = item.image;
 
 			if (item.inputedImage) {
 				const storageRef = ref(storage, `academic/${item.id}`);
 
 				await uploadBytes(storageRef, item.inputedImage);
 
-				imageUrl = await getDownloadURL(storageRef);
-				console.log("imageUrl", imageUrl);
+				image = await getDownloadURL(storageRef);
+				console.log("image", image);
 			}
 
 			const detailsRef = doc(db, "data", "academic-education", "list", item.id);
@@ -112,7 +112,7 @@ class AcademicApi {
 			const body = {
 				title: item.title,
 				subtitle: item.subtitle,
-				imageUrl,
+				image,
 				category: item.category,
 				date: item.date
 			};

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useHero } from "../../../context/HeroContext.hooks";
 import { HeroProps } from "../../../types/Hero.types";
+import { InputImage } from "../../../types/Projects.types";
 
 export default function EditHero() {
 	const { data: details, updateData } = useHero();
@@ -10,12 +11,12 @@ export default function EditHero() {
 	const [title, setTitle] = useState<HeroProps["title"]>("");
 	const [subtitle, setSubtitle] = useState<HeroProps["subtitle"]>("");
 	const [image, setImage] = useState<string>("");
-	const [inputedImage, setInputedImage] = useState<Blob | Uint8Array | ArrayBuffer | null>(null);
+	const [inputedImage, setInputedImage] = useState<InputImage | null>(null);
 
 	useEffect(() => {
 		setTitle(details?.title ?? "");
 		setSubtitle(details?.subtitle ?? "");
-		setImage(details?.imageUrl ?? "");
+		setImage(details?.image ?? "");
 	}, [details]);
 
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {

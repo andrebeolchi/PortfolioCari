@@ -106,7 +106,7 @@ export default function EditAcademic() {
 											<div className="flex items-center gap-x-3">
 												<img
 													className="h-10 w-10 object-contain "
-													src={item.imageUrl}
+													src={item.image}
 													alt={item.title}
 												/>
 												<div>

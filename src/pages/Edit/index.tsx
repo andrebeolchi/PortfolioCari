@@ -24,7 +24,7 @@ export default function EditPage({ children }: { children: React.ReactNode }) {
 						submenus: academicData.items?.map((item) => ({
 							name: item.title,
 							description: item.category,
-							imageUrl: item.imageUrl,
+							image: item.image,
 							href: `/edit/academic/${item?.id}`
 						})),
 						emptyState: {
@@ -49,7 +49,7 @@ export default function EditPage({ children }: { children: React.ReactNode }) {
 						submenus: projectsData.items?.map((item) => ({
 							name: item.title,
 							description: item.subtitle,
-							imageUrl: item.images[0]?.url,
+							image: item.images[0]?.url,
 							href: `/edit/projects/${item?.id}`
 						})),
 						callsToAction: [

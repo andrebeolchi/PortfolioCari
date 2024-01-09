@@ -13,7 +13,7 @@ import {
 } from "@firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "@firebase/storage";
 import { v4 as uuidv4 } from "uuid";
-import { ProjectsDetailsProps, ProjectsItemProps, ImagesProps } from "../types/Projects.types";
+import { ImagesProps, ProjectsDetailsProps, ProjectsItemProps } from "../types/Projects.types";
 import { db, storage } from "../utils/firebase";
 
 class ProjectsApi {
@@ -75,10 +75,10 @@ class ProjectsApi {
 
 						await uploadBytes(storageRef, inputedImage);
 
-						const imageUrl = await getDownloadURL(storageRef);
+						const image = await getDownloadURL(storageRef);
 
 						return images.push({
-							url: imageUrl,
+							url: image,
 							order: inputedImage.order ?? 0,
 							title: inputedImage.title ?? "",
 							id: imageId
@@ -124,10 +124,10 @@ class ProjectsApi {
 
 							await uploadBytes(storageRef, inputedImage);
 
-							const imageUrl = await getDownloadURL(storageRef);
+							const image = await getDownloadURL(storageRef);
 
 							return images.push({
-								url: imageUrl,
+								url: image,
 								order: inputedImage.order ?? 0,
 								title: inputedImage.title ?? "",
 								id: imageId

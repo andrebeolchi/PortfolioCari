@@ -13,7 +13,7 @@ export default function EditAcademicItems() {
 		id: id ?? "",
 		title: "",
 		category: "",
-		imageUrl: "",
+		image: "",
 		date: "",
 		subtitle: ""
 	});
@@ -142,16 +142,16 @@ export default function EditAcademicItems() {
 									Foto
 								</label>
 								<div className="mt-2 flex items-center gap-x-3">
-									{(academic?.inputedImage || academic?.imageUrl) && (
+									{(academic?.inputedImage || academic?.image) && (
 										<img
 											className="h-10 w-auto"
-											src={academic?.inputedImage ? URL.createObjectURL(academic?.inputedImage) : academic?.imageUrl}
+											src={academic?.inputedImage ? URL.createObjectURL(academic?.inputedImage) : academic?.image}
 										/>
 									)}
 									<label
 										htmlFor="file-upload"
 										className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-										<span>{academic?.inputedImage || academic?.imageUrl ? "Mudar" : "Adicionar"}</span>
+										<span>{academic?.inputedImage || academic?.image ? "Mudar" : "Adicionar"}</span>
 										<input
 											id="file-upload"
 											name="file-upload"

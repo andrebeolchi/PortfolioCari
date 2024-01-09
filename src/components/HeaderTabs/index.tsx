@@ -22,7 +22,7 @@ export default function HeaderTabs({ tabs }: { tabs: FlyoutMenuProps[] }) {
 						className="-m-1.5 p-1.5">
 						<img
 							className="h-8 w-auto"
-							src={data?.imageUrl}
+							src={data?.image}
 							alt=""
 						/>
 					</a>
@@ -70,7 +70,7 @@ export default function HeaderTabs({ tabs }: { tabs: FlyoutMenuProps[] }) {
 							className="-m-1.5 p-1.5">
 							<img
 								className="h-8 w-auto"
-								src={data?.imageUrl}
+								src={data?.image}
 								alt=""
 							/>
 						</a>
