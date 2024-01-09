@@ -7,11 +7,27 @@ export interface ProjectsItemProps {
 	id: string;
 	title: string;
 	subtitle: string;
-	inputedImage?: Blob | Uint8Array | ArrayBuffer;
-	imageUrl: string;
-	date: string;
-	category: string;
+	description: string;
+	bullets: BulletProps[];
+
+	inputedImages?: InputImage[];
+	images: ImagesProps[];
 	order: number;
+}
+
+export type InputImage = File & { order?: number; title?: string };
+
+interface BulletProps {
+	icon: string;
+	title: string;
+	description: string;
+}
+
+interface ImagesProps {
+	url: string;
+	title: string;
+	order: number;
+	id: string;
 }
 
 export interface ProjectsProps extends ProjectsDetailsProps {

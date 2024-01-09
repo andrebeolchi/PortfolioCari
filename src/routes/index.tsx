@@ -4,10 +4,12 @@ import { AuthProvider } from "../context/AuthContext";
 import { HeroProvider } from "../context/HeroContext";
 
 import { AcademicProvider } from "../context/AcademicContext";
+import { ProjectsProvider } from "../context/ProjectsContext";
 import EditAcademic from "../views/Edit/Academic";
 import EditAcademicItems from "../views/Edit/AcademicItems";
 import EditHero from "../views/Edit/Hero";
 import EditProjects from "../views/Edit/Projects";
+import EditProjectsItems from "../views/Edit/ProjectsItems";
 import { ProtectedRoute } from "./ProtectedRoute";
 
 const Home = lazy(() => import("../pages/Home"));
@@ -19,79 +21,81 @@ export default function AppRoutes() {
 		<AuthProvider>
 			<HeroProvider>
 				<AcademicProvider>
-					<BrowserRouter>
-						<Routes>
-							<Route
-								path="/"
-								element={<Home />}
-							/>
+					<ProjectsProvider>
+						<BrowserRouter>
+							<Routes>
+								<Route
+									path="/"
+									element={<Home />}
+								/>
 
-							<Route
-								path="/login"
-								element={<Login />}
-							/>
+								<Route
+									path="/login"
+									element={<Login />}
+								/>
 
-							<Route
-								path="/edit"
-								element={
-									<ProtectedRoute>
-										<EditPage>
-											<EditHero />
-										</EditPage>
-									</ProtectedRoute>
-								}
-							/>
+								<Route
+									path="/edit"
+									element={
+										<ProtectedRoute>
+											<EditPage>
+												<EditHero />
+											</EditPage>
+										</ProtectedRoute>
+									}
+								/>
 
-							<Route
-								path="/edit/academic"
-								element={
-									<ProtectedRoute>
-										<EditPage>
-											<EditAcademic />
-										</EditPage>
-									</ProtectedRoute>
-								}
-							/>
+								<Route
+									path="/edit/academic"
+									element={
+										<ProtectedRoute>
+											<EditPage>
+												<EditAcademic />
+											</EditPage>
+										</ProtectedRoute>
+									}
+								/>
 
-							<Route
-								path="/edit/academic/:id"
-								element={
-									<ProtectedRoute>
-										<EditPage>
-											<EditAcademicItems />
-										</EditPage>
-									</ProtectedRoute>
-								}
-							/>
+								<Route
+									path="/edit/academic/:id"
+									element={
+										<ProtectedRoute>
+											<EditPage>
+												<EditAcademicItems />
+											</EditPage>
+										</ProtectedRoute>
+									}
+								/>
 
-							<Route
-								path="/edit/projects"
-								element={
-									<ProtectedRoute>
-										<EditPage>
-											<EditProjects />
-										</EditPage>
-									</ProtectedRoute>
-								}
-							/>
+								<Route
+									path="/edit/projects"
+									element={
+										<ProtectedRoute>
+											<EditPage>
+												<EditProjects />
+											</EditPage>
+										</ProtectedRoute>
+									}
+								/>
 
-							<Route
-								path="/edit/projects/:id"
-								element={
-									<ProtectedRoute>
-										<EditPage>
-											<EditProjects />
-										</EditPage>
-									</ProtectedRoute>
-								}
-							/>
+								<Route
+									path="/edit/projects/:id"
+									element={
+										<ProtectedRoute>
+											<EditPage>
+												<EditProjectsItems />
+											</EditPage>
+										</ProtectedRoute>
+									}
+								/>
 
-							<Route
-								path="*"
-								element={<Home />}
-							/>
-						</Routes>
-					</BrowserRouter>
+								<Route
+									path="*"
+									element={<Home />}
+								/>
+							</Routes>
+						</BrowserRouter>
+					</ProjectsProvider>
 				</AcademicProvider>
 			</HeroProvider>
 		</AuthProvider>

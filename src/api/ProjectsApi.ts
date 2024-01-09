@@ -38,6 +38,11 @@ class ProjectsApi {
 
 			const data = await getDocs(ordered);
 
+			console.log(
+				"projects",
+				data.docs.map((doc) => doc.data())
+			);
+
 			return data.docs.map((doc) => doc.data() as ProjectsItemProps);
 		} catch (error) {
 			console.log("error", error);
@@ -60,18 +65,27 @@ class ProjectsApi {
 		try {
 			const newId = uuidv4();
 
-			let imageUrl = item.imageUrl;
+			const images = item.images;
 
-			if (item.inputedImage) {
-				const storageRef = ref(storage, `projects/${newId}`);
+			if (item.inputedImages && item.inputedImages?.length > 0) {
+				await Promise.all(
+					item.inputedImages?.map(async (inputedImage) => {
+						const imageId = uuidv4();
+						const storageRef = ref(storage, `projects/${newId}/${imageId}`);
 
-				await uploadBytes(storageRef, item.inputedImage);
+						await uploadBytes(storageRef, inputedImage);
 
-				imageUrl = await getDownloadURL(storageRef);
-				console.log("imageUrl", imageUrl);
+						const imageUrl = await getDownloadURL(storageRef);
+
+						return images.push({
+							url: imageUrl,
+							order: inputedImage.order ?? 0,
+							title: inputedImage.title ?? "",
+							id: imageId
+						});
+					})
+				);
 			}
-
-			const detailsRef = doc(db, `data/projects/list/${newId}`);
 
 			const snapshot = await getCountFromServer(collection(db, "data/projects/list"));
 
@@ -79,15 +93,14 @@ class ProjectsApi {
 				id: newId,
 				title: item.title,
 				subtitle: item.subtitle,
-				imageUrl,
-				category: item.category,
-				date: item.date,
+				images,
+				description: item.description,
 				order: (snapshot.data().count ?? 0) + 1
 			};
 
-			await setDoc(detailsRef, body);
+			const detailsRef = doc(db, `data/projects/list/${newId}`);
 
-			console.log("ref", ref);
+			await setDoc(detailsRef, body);
 		} catch (error) {
 			console.log("error", error);
 			throw new Error(error.response.data.error);

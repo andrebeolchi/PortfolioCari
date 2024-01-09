@@ -40,8 +40,11 @@ export default function HeaderTabs({ tabs }: { tabs: FlyoutMenuProps[] }) {
 					</button>
 				</div>
 				<div className="hidden lg:flex lg:gap-x-12">
-					{tabs.map((item) => (
-						<FlyoutMenu menu={item} />
+					{tabs.map((item, index) => (
+						<FlyoutMenu
+							menu={item}
+							key={index}
+						/>
 					))}
 				</div>
 				<div className="hidden lg:flex lg:flex-1 lg:justify-end">

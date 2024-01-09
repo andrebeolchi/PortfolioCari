@@ -41,8 +41,8 @@ export const ProjectsProvider = ({ children }: ProjectsProviderProps) => {
 		const [details, list] = await Promise.all([ProjectsApi.getProjectsDetails(), ProjectsApi.getProjectsList()]);
 
 		setData({
-			title: details.title,
-			description: details.description,
+			title: details?.title ?? "",
+			description: details?.description ?? "",
 			items: list
 		});
 		setIsLoading(false);
