@@ -1,7 +1,7 @@
 import HeaderTabs from "../../components/HeaderTabs";
-import { useAcademic } from "../../context/AcademicContext.hooks";
-import { useHero } from "../../context/HeroContext.hooks";
-import { useProjects } from "../../context/ProjectsContext.hooks";
+import { useAcademic } from "../../context/Academic/AcademicContext.hooks";
+import { useHero } from "../../context/Hero/HeroContext.hooks";
+import { useProjects } from "../../context/Projects/ProjectsContext.hooks";
 
 export default function HeroSection() {
 	const { data: details } = useHero();

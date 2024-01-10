@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useAcademic } from "../../../context/AcademicContext.hooks";
+import { useAcademic } from "../../../context/Academic/AcademicContext.hooks";
 import { AcademicItemProps } from "../../../types/Academic.types";
 
 export default function EditAcademicItems() {

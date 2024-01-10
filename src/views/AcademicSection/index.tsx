@@ -1,4 +1,4 @@
-import { useAcademic } from "../../context/AcademicContext.hooks";
+import { useAcademic } from "../../context/Academic/AcademicContext.hooks";
 
 export default function AcademicSection() {
 	const { data } = useAcademic();

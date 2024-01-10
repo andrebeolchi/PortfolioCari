@@ -1,7 +1,7 @@
 import { AcademicCapIcon, FolderPlusIcon, PencilIcon } from "@heroicons/react/20/solid";
 import HeaderTabs from "../../components/HeaderTabs";
-import { useAcademic } from "../../context/AcademicContext.hooks";
-import { useProjects } from "../../context/ProjectsContext.hooks";
+import { useAcademic } from "../../context/Academic/AcademicContext.hooks";
+import { useProjects } from "../../context/Projects/ProjectsContext.hooks";
 
 export default function EditPage({ children }: { children: React.ReactNode }) {
 	const { data: academicData } = useAcademic();
@@ -65,10 +65,10 @@ export default function EditPage({ children }: { children: React.ReactNode }) {
 							}
 						]
 					},
-          {
-            name: "Rodapé",
-            href: "/edit/footer"
-          }
+					{
+						name: "Rodapé",
+						href: "/edit/footer"
+					}
 				]}
 			/>
 

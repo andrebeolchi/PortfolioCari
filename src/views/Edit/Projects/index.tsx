@@ -1,6 +1,6 @@
 import { ArrowDownIcon, ArrowUpIcon } from "@heroicons/react/20/solid";
 import { useEffect, useState } from "react";
-import { useProjects } from "../../../context/ProjectsContext.hooks";
+import { useProjects } from "../../../context/Projects/ProjectsContext.hooks";
 import { ProjectsDetailsProps, ProjectsItemProps } from "../../../types/Projects.types";
 
 export default function EditProjects() {

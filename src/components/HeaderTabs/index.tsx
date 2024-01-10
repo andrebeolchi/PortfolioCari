@@ -1,8 +1,8 @@
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
-import { useAuth } from "../../context/AuthContext.hooks";
-import { useHero } from "../../context/HeroContext.hooks";
+import { useAuth } from "../../context/Auth/AuthContext.hooks";
+import { useHero } from "../../context/Hero/HeroContext.hooks";
 import FlyoutMenu from "./FlyoutMenu";
 import { FlyoutMenuProps } from "./types";
 

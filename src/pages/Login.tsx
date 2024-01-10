@@ -2,7 +2,7 @@ import { FirebaseError } from "@firebase/util";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
-import { useAuth } from "../context/AuthContext.hooks";
+import { useAuth } from "../context/Auth/AuthContext.hooks";
 import { signIn } from "../utils/firebase";
 
 export default function Login() {

@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import HeroApi from "../api/HeroApi";
-import { HeroProps } from "../types/Hero.types";
+import HeroApi from "../../api/HeroApi";
+import { HeroProps } from "../../types/Hero.types";
 
 interface HeroContextProps {
 	data: HeroProps;

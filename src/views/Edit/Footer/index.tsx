@@ -1,16 +1,8 @@
 import { TrashIcon } from "@heroicons/react/20/solid";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-
-export interface FooterGroup {
-	title: string;
-	items: FooterItem[];
-}
-
-export interface FooterItem {
-	title: string;
-	href: string;
-}
+import { useFooter } from "../../../context/Footer/FooterContext.hooks";
+import { FooterGroup } from "../../../types/Footer";
 
 export default function EditFooterItems() {
 	const { id } = useParams<{ id: string }>();
@@ -18,20 +10,14 @@ export default function EditFooterItems() {
 
 	const [groups, setGroups] = useState<FooterGroup[]>([]);
 
-	// const { data: academicData, updateItem, createItem, deleteItem } = useFooter();
+	const { data: footer, upsertData } = useFooter();
 
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
+		console.log("groups ", groups);
 
 		try {
-			if (id === "new") {
-				// 	await createItem(academic);
-
-				navigate("/edit/footer");
-				return;
-			}
-
-			// await updateItem(footer);
+			await upsertData(groups);
 
 			navigate("/edit/footer");
 		} catch (error) {
@@ -39,24 +25,20 @@ export default function EditFooterItems() {
 		}
 	};
 
-	// useEffect(() => {
-	// 	if (id !== "new") {
-	// 		const item = academicData?.items?.find((item) => item.id === id);
+	useEffect(() => {
+		if (footer) {
+			setGroups(footer);
+		}
+	}, [footer, id]);
 
-	// 		if (item) {
-	// 			setFooter(item);
-	// 		}
-	// 	}
-	// }, [academicData, id]);
-
-	// if (!academicData) {
-	// 	return null;
-	// }
+	if (!footer) {
+		return null;
+	}
 
 	return (
 		<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
 			<form
-				method={id === "new" ? "POST" : "PUT"}
+				method={"POST"}
 				onSubmit={handleSubmit}>
 				<div className="space-y-12">
 					<div className="border-b border-gray-900/10 pb-12">
@@ -69,6 +51,7 @@ export default function EditFooterItems() {
 							</div>
 							<div>
 								<button
+									type="button"
 									onClick={() => setGroups([...groups, { title: "", items: [{ title: "", href: "" }] }])}
 									className="rounded-md bg-lime-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-lime-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-600">
 									Novo Grupo
@@ -76,7 +59,7 @@ export default function EditFooterItems() {
 							</div>
 						</div>
 
-						{groups.map((group, groupIndex) => (
+						{groups?.map((group, groupIndex) => (
 							<div
 								key={groupIndex}
 								className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 bg-white rounded-xl shadow-xl ring-1 ring-gray-400/10 p-4">
@@ -136,8 +119,10 @@ export default function EditFooterItems() {
 										className="block text-sm font-medium leading-6 text-gray-900">
 										Itens*
 									</label>
-									{group.items.map((item, groupItemIndex) => (
-										<div className="flex flex-row flex-1 mt-2">
+									{group.items?.map((item, groupItemIndex) => (
+										<div
+											className="flex flex-row flex-1 mt-2"
+											key={groupItemIndex}>
 											<button
 												type="button"
 												className="rounded-md px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 bg-red-400/10 mr-2.5"
@@ -156,7 +141,7 @@ export default function EditFooterItems() {
 													autoComplete="title"
 													className="block flex-1 border-0 bg-transparent py-1.5 pl-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
 													placeholder="Título do item"
-													value={group.items[groupItemIndex].title}
+													value={item?.title}
 													required
 													onChange={(event) => {
 														const groupsCopy = [...groups];
@@ -173,7 +158,7 @@ export default function EditFooterItems() {
 													autoComplete="link"
 													className="block flex-1 border-0 bg-transparent py-1.5 pl-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
 													placeholder="Link do item"
-													value={group.items[groupItemIndex].href}
+													value={item.href}
 													required
 													onChange={(event) => {
 														const groupsCopy = [...groups];
@@ -184,7 +169,7 @@ export default function EditFooterItems() {
 											</div>
 										</div>
 									))}
-									{group.items.length === 0 && (
+									{group.items?.length === 0 && (
 										// Empty State Message
 										<div className="flex flex-row flex-1 mt-2">
 											<div className="flex flex-1 rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-lime-600 mr-2.5">

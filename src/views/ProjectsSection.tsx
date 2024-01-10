@@ -1,6 +1,6 @@
 import { Carousel, Dialog, DialogBody, IconButton } from "@material-tailwind/react";
 import { useState } from "react";
-import { useProjects } from "../context/ProjectsContext.hooks";
+import { useProjects } from "../context/Projects/ProjectsContext.hooks";
 import { ImagesProps } from "../types/Projects.types";
 
 export default function ProjectsSection() {
@@ -153,7 +153,7 @@ export default function ProjectsSection() {
 			</div>
 			<Dialog
 				placeholder={""}
-				open={Boolean(selectedImage !== null && selectedImage?.url}
+				open={Boolean(selectedImage !== null && selectedImage?.url)}
 				handler={handleOpen}>
 				<DialogBody
 					placeholder={""}

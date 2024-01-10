@@ -1,6 +1,6 @@
 import { ArrowDownIcon, ArrowUpIcon } from "@heroicons/react/20/solid";
 import { useEffect, useState } from "react";
-import { useAcademic } from "../../../context/AcademicContext.hooks";
+import { useAcademic } from "../../../context/Academic/AcademicContext.hooks";
 import { AcademicDetailsProps, AcademicItemProps } from "../../../types/Academic.types";
 
 export default function EditAcademic() {

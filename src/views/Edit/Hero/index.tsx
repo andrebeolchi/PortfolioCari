@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useHero } from "../../../context/HeroContext.hooks";
+import { useHero } from "../../../context/Hero/HeroContext.hooks";
 import { HeroProps } from "../../../types/Hero.types";
 import { InputImage } from "../../../types/Projects.types";
 

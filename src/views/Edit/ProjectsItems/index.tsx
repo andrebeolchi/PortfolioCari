@@ -1,7 +1,7 @@
 import { ArrowDownIcon, ArrowUpIcon, TrashIcon } from "@heroicons/react/20/solid";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useProjects } from "../../../context/ProjectsContext.hooks";
+import { useProjects } from "../../../context/Projects/ProjectsContext.hooks";
 import { InputImage, ProjectsItemProps } from "../../../types/Projects.types";
 
 const InvisibleButton = () => (

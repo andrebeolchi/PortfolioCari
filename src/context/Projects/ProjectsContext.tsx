@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import ProjectsApi from "../api/ProjectsApi";
-import { ProjectsDetailsProps, ProjectsItemProps, ProjectsProps } from "../types/Projects.types";
+import ProjectsApi from "../../api/ProjectsApi";
+import { ProjectsDetailsProps, ProjectsItemProps, ProjectsProps } from "../../types/Projects.types";
 
 interface ProjectsContextProps {
 	data?: ProjectsProps;

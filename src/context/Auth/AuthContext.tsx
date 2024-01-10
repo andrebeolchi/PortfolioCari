@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { auth } from "../utils/firebase";
+import { auth } from "../../utils/firebase";
 
 interface AuthContextProps {
 	isAuthenticated: boolean;
