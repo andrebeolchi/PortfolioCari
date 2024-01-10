@@ -21,6 +21,7 @@ class HeroApi {
 	async updateHero(hero: HeroProps): Promise<void> {
 		try {
 			let image = hero.image;
+			let curriculum = hero.curriculum;
 
 			if (hero.inputedImage) {
 				const storageRef = ref(storage, `images/icon`);
@@ -30,12 +31,21 @@ class HeroApi {
 				image = await getDownloadURL(storageRef);
 			}
 
+			if (hero.inputedCurriculum) {
+				const storageRef = ref(storage, `${hero.inputedCurriculum?.name}`);
+
+				await uploadBytes(storageRef, hero.inputedCurriculum);
+
+				curriculum = await getDownloadURL(storageRef);
+			}
+
 			const detailsRef = doc(db, "data", "hero-section");
 
 			const body = {
 				title: hero.title,
 				subtitle: hero.subtitle,
-				image
+				image,
+				curriculum
 			};
 
 			await updateDoc(detailsRef, body);

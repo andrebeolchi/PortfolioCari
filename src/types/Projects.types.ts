@@ -19,6 +19,8 @@ export interface ProjectsItemProps {
 
 export type InputImage = File & { order?: number; title?: string; id?: string; url?: string };
 
+export type InputFile = File & { title?: string; id?: string; url?: string };
+
 export interface BulletProps {
 	icon: ElementType;
 	title: string;

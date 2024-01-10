@@ -7,6 +7,7 @@ interface HeroContextProps {
 	data: HeroProps;
 	isLoading: boolean;
 	updateData: (data: HeroProps) => Promise<void>;
+	isUpdating: boolean;
 }
 
 interface HeroProviderProps {
@@ -17,19 +18,24 @@ export const HeroContext = createContext<HeroContextProps>({
 	data: {
 		title: "",
 		subtitle: "",
-		image: ""
+		image: "",
+		curriculum: ""
 	},
 	updateData: async () => {},
-	isLoading: true
+	isLoading: true,
+	isUpdating: false
 });
 
 export const HeroProvider = ({ children }: HeroProviderProps) => {
 	const [data, setData] = useState<HeroProps>({
 		title: "",
 		subtitle: "",
-		image: ""
+		image: "",
+		curriculum: ""
 	});
 	const [isLoading, setIsLoading] = useState<boolean>(true);
+
+	const [isUpdating, setIsUpdating] = useState<boolean>(false);
 
 	const getData = async () => {
 		setIsLoading(true);
@@ -44,11 +50,13 @@ export const HeroProvider = ({ children }: HeroProviderProps) => {
 
 	const updateData = async (data: HeroProps) => {
 		try {
+			setIsUpdating(true);
 			await HeroApi.updateHero(data);
 			toast.success("Dados atualizados com sucesso!");
 		} catch (error) {
 			toast.error("Ocorreu um erro ao atualizar os dados!");
 		}
+		setIsUpdating(false);
 	};
 
 	useEffect(() => {
@@ -60,7 +68,8 @@ export const HeroProvider = ({ children }: HeroProviderProps) => {
 			value={{
 				data,
 				updateData,
-				isLoading
+				isLoading,
+				isUpdating
 			}}>
 			{children}
 		</HeroContext.Provider>

@@ -1,15 +1,18 @@
+import { MagnifyingGlassPlusIcon } from "@heroicons/react/20/solid";
 import { useEffect, useState } from "react";
 import { useHero } from "../../../context/Hero/HeroContext.hooks";
 import { HeroProps } from "../../../types/Hero.types";
-import { InputImage } from "../../../types/Projects.types";
+import { InputFile, InputImage } from "../../../types/Projects.types";
 
 export default function EditHero() {
-	const { data: details, updateData } = useHero();
+	const { data: details, updateData, isUpdating } = useHero();
 
 	const [title, setTitle] = useState<HeroProps["title"]>("");
 	const [subtitle, setSubtitle] = useState<HeroProps["subtitle"]>("");
 	const [image, setImage] = useState<string>("");
 	const [inputedImage, setInputedImage] = useState<InputImage | undefined>(undefined);
+	const [curriculum, setCurriculum] = useState<string>("");
+	const [inputedCurriculum, setInputedCurriculum] = useState<InputFile | undefined>(undefined);
 
 	useEffect(() => {
 		setTitle(details?.title ?? "");
@@ -25,7 +28,9 @@ export default function EditHero() {
 				title,
 				subtitle,
 				image,
-				inputedImage
+				inputedImage,
+				curriculum,
+				inputedCurriculum
 			});
 		} catch (error) {
 			console.log("error ", error);
@@ -52,7 +57,7 @@ export default function EditHero() {
 									Título
 								</label>
 								<div className="mt-2">
-									<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+									<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-light-green-600 sm:max-w-md">
 										<input
 											type="text"
 											name="title"
@@ -78,20 +83,20 @@ export default function EditHero() {
 										id="about"
 										name="about"
 										rows={5}
-										className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+										className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-light-green-600 sm:text-sm sm:leading-6"
 										onChange={(event) => setSubtitle(event.target.value)}
 										value={subtitle}
 									/>
 								</div>
 							</div>
 
-							<div className="col-span-full">
+							<div className="sm:col-span-3">
 								<label
 									htmlFor="photo"
 									className="block text-sm font-medium leading-6 text-gray-900">
 									Foto
 								</label>
-								<div className="mt-2 flex items-center gap-x-3">
+								<div className="mt-2 flex items-center gap-x-2.5">
 									<img
 										className="h-10 w-10"
 										src={inputedImage ? URL.createObjectURL(inputedImage) : image}
@@ -104,8 +109,43 @@ export default function EditHero() {
 											id="file-upload"
 											name="file-upload"
 											type="file"
+											accept="image/*"
 											className="sr-only"
 											onChange={(event) => setInputedImage(event.target.files?.[0] ?? undefined)}
+										/>
+									</label>
+								</div>
+							</div>
+
+							<div className="sm:col-span-3">
+								<label
+									htmlFor="photo"
+									className="block text-sm font-medium leading-6 text-gray-900">
+									Currículo
+								</label>
+								<div className="mt-2 flex items-center gap-x-2.5">
+									{(details?.curriculum || inputedCurriculum) && (
+										<a
+											href={details?.curriculum ?? URL.createObjectURL(inputedCurriculum ?? new File([], ""))}
+											target="_blank"
+											rel="noopener noreferrer"
+											className="rounded-md bg-gray-100 px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-100">
+											<MagnifyingGlassPlusIcon className="h-5 w-5" />
+										</a>
+									)}
+									<label
+										htmlFor="cv-upload"
+										className="rounded-md bg-gray-100 px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-100">
+										{inputedCurriculum ? inputedCurriculum.name : "Mudar"}
+										<input
+											id="cv-upload"
+											name="cv-upload"
+											type="file"
+											accept=".pdf"
+											className="sr-only"
+											onChange={(event) =>
+												event.target.files?.[0] ? setInputedCurriculum(event.target.files?.[0] ?? undefined) : undefined
+											}
 										/>
 									</label>
 								</div>
@@ -117,8 +157,10 @@ export default function EditHero() {
 				<div className="mt-6 flex items-center justify-end gap-x-6">
 					<button
 						type="submit"
-						className="rounded-md bg-light-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-light-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-						Salvar
+						className={`rounded-md bg-light-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-light-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-light-green-600 ${
+							isUpdating ? "opacity-50 cursor-not-allowed" : ""
+						}`}>
+						{isUpdating ? "Salvando..." : "Salvar"}
 					</button>
 				</div>
 			</form>
