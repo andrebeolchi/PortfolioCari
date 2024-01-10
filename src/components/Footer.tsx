@@ -54,7 +54,7 @@ export default function Footer() {
 				</div>
 				<div className="mt-12 flex w-full flex-col items-center justify-center border-t border-blue-gray-50 py-4 md:flex-row md:justify-between">
 					<a className="mb-4 text-center font-normal text-blue-gray-900 md:mb-0">
-						© 2024 {`${new Date().getFullYear() === 2024 ? "" : ` - ${new Date().getFullYear()}`} ${hero?.title}`}
+						© 2024 {`${new Date().getFullYear() === 2024 ? "" : ` - ${new Date().getFullYear()}`}`}
 					</a>
 					<div className="flex gap-4 text-blue-gray-900 sm:justify-center">
 						{/* Facebook */}
@@ -62,7 +62,7 @@ export default function Footer() {
 							href="#"
 							className="opacity-80 hover:opacity-100 hover:text-light-green-600 transition ease-in-out">
 							<svg
-								className="h-5 w-5"
+								className="h-6 w-6"
 								fill="currentColor"
 								viewBox="0 0 24 24"
 								aria-hidden="true">
@@ -80,7 +80,7 @@ export default function Footer() {
 								href={footer?.social?.instagram}
 								className="opacity-80 hover:opacity-100 hover:text-light-green-600 transition ease-in-out">
 								<svg
-									className="h-5 w-5"
+									className="h-6 w-6"
 									fill="currentColor"
 									viewBox="0 0 30 30"
 									aria-hidden="true">
@@ -95,7 +95,7 @@ export default function Footer() {
 								href={footer?.social?.whatsapp}
 								className="opacity-80 hover:opacity-100 hover:text-light-green-600 transition ease-in-out">
 								<svg
-									className="h-5 w-5"
+									className="h-6 w-6"
 									fill="currentColor"
 									viewBox="0 0 30 30"
 									aria-hidden="true">
@@ -109,7 +109,7 @@ export default function Footer() {
 							href="#"
 							className="opacity-80 hover:opacity-100 hover:text-light-green-600 transition ease-in-out">
 							<svg
-								className="h-5 w-5"
+								className="h-6 w-6"
 								fill="currentColor"
 								viewBox="0 0 24 24"
 								aria-hidden="true">
@@ -122,7 +122,7 @@ export default function Footer() {
 							href="#"
 							className="opacity-80 hover:opacity-100 hover:text-light-green-600 transition ease-in-out">
 							<svg
-								className="h-5 w-5"
+								className="h-6 w-6"
 								fill="currentColor"
 								viewBox="0 0 24 24"
 								aria-hidden="true">

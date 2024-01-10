@@ -57,11 +57,11 @@ export default function HeroSection() {
 						<h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">{details?.title}</h1>
 						<p className="mt-6 text-lg leading-8 text-gray-600">{details?.subtitle}</p>
 						<div className="mt-10 flex items-center justify-center gap-x-6">
-							<a
-								href="#" // Scroll to the contact section
-								className="rounded-md bg-light-green-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-light-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-light-green-500 transition ease-in-out">
+							<span
+								className="cursor-pointer rounded-md bg-light-green-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-light-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-light-green-500 transition ease-in-out"
+								onClick={() => window.open(footer?.social?.whatsapp ?? "#", "_blank")}>
 								Contato
-							</a>
+							</span>
 							<Link
 								to={"projects"}
 								className="transition-colors text-sm font-semibold leading-6 text-gray-900 hover:text-light-green-500 cursor-pointer"
