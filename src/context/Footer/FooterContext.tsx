@@ -8,6 +8,7 @@ interface FooterContextProps {
 	isLoading: boolean;
 	upsertData: (data: FooterGroup[]) => Promise<void>;
 	updateSocial: (data: FooterSocial) => Promise<void>;
+	isUpdating: boolean;
 }
 
 interface FooterData {
@@ -23,12 +24,15 @@ export const FooterContext = createContext<FooterContextProps>({
 	data: undefined,
 	upsertData: async () => {},
 	updateSocial: async () => {},
-	isLoading: true
+	isLoading: true,
+	isUpdating: false
 });
 
 export const FooterProvider = ({ children }: FooterProviderProps) => {
 	const [data, setData] = useState<FooterData>();
 	const [isLoading, setIsLoading] = useState<boolean>(true);
+	const [isUpdatingData, setIsUpdatingData] = useState<boolean>(false);
+	const [isUpdatingSocial, setIsUpdatingSocial] = useState<boolean>(false);
 
 	const getData = async () => {
 		setIsLoading(true);
@@ -47,20 +51,24 @@ export const FooterProvider = ({ children }: FooterProviderProps) => {
 
 	const upsertData = async (data: FooterGroup[]) => {
 		try {
+			setIsUpdatingData(true);
 			await FooterApi.upsertFooterLists(data);
 			toast.success("As listas foram atualizadas com sucesso!");
 		} catch (error) {
 			toast.error("Ocorreu um erro ao atualizar os dados!");
 		}
+		setIsUpdatingData(false);
 	};
 
 	const updateSocial = async (data: FooterSocial) => {
+		setIsUpdatingSocial(true);
 		try {
 			await FooterApi.updateFooterSocial(data);
 			toast.success("Suas mídias sociais foram atualizadas com sucesso!");
 		} catch (error) {
 			toast.error("Ocorreu um erro ao atualizar os dados!");
 		}
+		setIsUpdatingSocial(false);
 	};
 
 	useEffect(() => {
@@ -73,7 +81,8 @@ export const FooterProvider = ({ children }: FooterProviderProps) => {
 				data,
 				isLoading,
 				upsertData,
-				updateSocial
+				updateSocial,
+				isUpdating: isUpdatingData || isUpdatingSocial
 			}}>
 			{children}
 		</FooterContext.Provider>

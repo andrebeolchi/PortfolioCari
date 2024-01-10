@@ -25,25 +25,29 @@ export default function Footer() {
 							{hero?.title}
 						</span>
 					</a>
-					<div className="grid grid-cols-2 sm:grid-cols-3 justify-between gap-4">
+					<div className="grid grid-cols-2 sm:grid-cols-3 justify-between gap-8">
 						{footer?.list?.map(({ title, items }) => (
 							<ul key={title}>
 								<span
 									color="blue-gray"
-									className="mb-3 font-medium opacity-40">
+									className="font-medium opacity-40">
 									{title}
 								</span>
-								{items.map(({ href, title }) => (
-									<li key={href}>
-										<a
-											href={href}
-											about="_blank"
-											color="gray"
-											className="py-1.5 font-normal transition-colors hover:text-light-green-600">
-											{title}
-										</a>
-									</li>
-								))}
+								<div className="mt-3">
+									{items.map(({ href, title }) => (
+										<li
+											key={href}
+											className="mt-1.5">
+											<span
+												onClick={() => href.length > 3 && window.open(href, "_blank")}
+												className={`py-1.5 font-normal ${
+													href.length > 3 && "transition-colors hover:text-light-green-600 cursor-pointer"
+												}`}>
+												{title}
+											</span>
+										</li>
+									))}
+								</div>
 							</ul>
 						))}
 					</div>

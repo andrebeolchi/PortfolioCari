@@ -1,4 +1,4 @@
-import { TrashIcon } from "@heroicons/react/20/solid";
+import { MagnifyingGlassPlusIcon, TrashIcon } from "@heroicons/react/20/solid";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -12,7 +12,7 @@ export default function EditFooterItems() {
 	const [groups, setGroups] = useState<FooterGroup[]>([]);
 	const [social, setSocial] = useState<FooterSocial>();
 
-	const { data: footer, upsertData, updateSocial } = useFooter();
+	const { data: footer, upsertData, updateSocial, isUpdating } = useFooter();
 
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
@@ -225,22 +225,36 @@ export default function EditFooterItems() {
 													}}
 												/>
 											</div>
-											<div className="flex flex-1 rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-light-green-600">
-												<input
-													type="text"
-													name="link"
-													id="link"
-													autoComplete="link"
-													className="block flex-1 border-0 bg-transparent py-1.5 pl-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-													placeholder="Link do item"
-													value={item.href}
-													required
-													onChange={(event) => {
-														const groupsCopy = [...groups];
-														groupsCopy[groupIndex].items[groupItemIndex].href = event.target.value;
-														setGroups(groupsCopy);
-													}}
-												/>
+											<div className="flex flex-1 rounded-md gap-2">
+												{(item?.href || item?.inputedFile) && (
+													<a
+														href={item?.inputedFile ? URL.createObjectURL(item?.inputedFile) : item?.href}
+														target="_blank"
+														rel="noopener noreferrer"
+														className="rounded-md bg-gray-50 px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+														<MagnifyingGlassPlusIcon className="h-5 w-5" />
+													</a>
+												)}
+												<label
+													htmlFor="cv-upload"
+													className="rounded-md bg-gray-50 px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+													{item?.inputedFile ? item?.inputedFile.name : "Mudar"}
+													<input
+														id="cv-upload"
+														name="cv-upload"
+														type="file"
+														accept=".pdf"
+														className="sr-only"
+														onChange={(event) => {
+															if (event.target.files?.[0]) {
+																const groupsCopy = [...groups];
+																groupsCopy[groupIndex].items[groupItemIndex].inputedFile =
+																	event.target.files?.[0] ?? undefined;
+																setGroups(groupsCopy);
+															}
+														}}
+													/>
+												</label>
 											</div>
 										</div>
 									))}
@@ -263,8 +277,10 @@ export default function EditFooterItems() {
 				<div className="mt-6 flex items-center justify-end gap-x-6">
 					<button
 						type="submit"
-						className="rounded-md bg-light-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-light-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-light-green-600">
-						Salvar
+						className={`rounded-md bg-light-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-light-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-light-green-600 ${
+							isUpdating ? "opacity-50 cursor-not-allowed" : ""
+						}`}>
+						{isUpdating ? "Salvando..." : "Salvar"}
 					</button>
 				</div>
 			</form>

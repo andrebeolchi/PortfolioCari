@@ -1,3 +1,5 @@
+import { InputFile } from "./Projects.types";
+
 export interface FooterGroup {
 	title: string;
 	items: FooterItem[];
@@ -12,5 +14,6 @@ export interface FooterSocial {
 export interface FooterItem {
 	title: string;
 	href: string;
+	inputedFile?: InputFile;
 	id?: string;
 }

@@ -1,7 +1,8 @@
 import { collection, doc, getDoc, getDocs, setDoc, writeBatch } from "@firebase/firestore";
+import { getDownloadURL, ref as storageRef, uploadBytes } from "@firebase/storage";
 import { v4 as uuidv4 } from "uuid";
 import { FooterGroup, FooterSocial } from "../types/Footer";
-import { FirebaseError, db } from "../utils/firebase";
+import { FirebaseError, db, storage } from "../utils/firebase";
 
 class FooterApi {
 	async getFooterLists(): Promise<FooterGroup[] | void> {
@@ -59,6 +60,21 @@ class FooterApi {
 					list.id = uuidv4();
 				}
 
+				await Promise.all(
+					list.items.map(async (item) => {
+						if (item.inputedFile) {
+							const fileRef = storageRef(storage, `files/${item.inputedFile.name}`);
+
+							await uploadBytes(fileRef, item.inputedFile);
+
+							const url = await getDownloadURL(fileRef);
+
+							item.href = url;
+							delete item.inputedFile;
+						}
+					})
+				);
+
 				const ref = doc(db, `data/footer/list/${list.id}`);
 
 				batch.set(ref, list);
@@ -66,6 +82,8 @@ class FooterApi {
 
 			await batch.commit();
 		} catch (error) {
+			console.log(error);
+
 			if (error instanceof FirebaseError) {
 				throw new Error(error.message);
 			}

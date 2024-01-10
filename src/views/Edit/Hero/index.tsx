@@ -126,7 +126,11 @@ export default function EditHero() {
 								<div className="mt-2 flex items-center gap-x-2.5">
 									{(details?.curriculum || inputedCurriculum) && (
 										<a
-											href={details?.curriculum ?? URL.createObjectURL(inputedCurriculum ?? new File([], ""))}
+											href={
+												inputedCurriculum
+													? URL.createObjectURL(inputedCurriculum ?? new File([], ""))
+													: details?.curriculum
+											}
 											target="_blank"
 											rel="noopener noreferrer"
 											className="rounded-md bg-gray-50 px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
