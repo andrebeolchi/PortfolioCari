@@ -120,7 +120,7 @@ export default function EditProjects() {
 													{index < items?.length - 1 && (
 														<button
 															type="button"
-															className="rounded-md bg-gray-100 px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-100"
+															className="rounded-md bg-gray-50 px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
 															onClick={() => {
 																const newItems = [...items];
 																const itemToMove = newItems[index];
@@ -136,7 +136,7 @@ export default function EditProjects() {
 													{index > 0 && (
 														<button
 															type="button"
-															className="rounded-md bg-gray-100 px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-100"
+															className="rounded-md bg-gray-50 px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
 															onClick={() => {
 																const newItems = [...items];
 																const itemToMove = newItems[index];

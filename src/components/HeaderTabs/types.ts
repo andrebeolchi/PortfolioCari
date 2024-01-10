@@ -3,6 +3,7 @@ import { ElementType } from "react";
 export interface FlyoutMenuProps {
 	name: string;
 	href?: string;
+	to?: string;
 	submenus?: SubmenuProps[];
 	emptyState?: {
 		title: string;
@@ -16,6 +17,7 @@ export interface FlyoutMenuProps {
 export interface SubmenuProps {
 	name: string;
 	href?: string;
+	to?: string;
 	onClick?: () => void;
 	image?: string;
 	icon?: ElementType;

@@ -64,7 +64,7 @@ export default function EditForms() {
 									/>
 									<button
 										type="button"
-										className="rounded-md bg-gray-100 px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-100">
+										className="rounded-md bg-gray-50 px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
 										Change
 									</button>
 								</div>
@@ -85,7 +85,7 @@ export default function EditForms() {
 										<div className="mt-4 flex text-sm leading-6 text-gray-600">
 											<label
 												htmlFor="file-upload"
-												className="relative cursor-pointer rounded-md bg-gray-100 font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
+												className="relative cursor-pointer rounded-md bg-gray-50 font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
 												<span>Upload a file</span>
 												<input
 													id="file-upload"

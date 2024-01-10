@@ -152,7 +152,7 @@ export default function EditProjectsItems() {
 								<div className="mt-2 flex items-center gap-x-3">
 									<label
 										htmlFor="file-upload"
-										className="rounded-md bg-gray-100 px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-100">
+										className="rounded-md bg-gray-50 px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
 										<span>Adicionar</span>
 										<input
 											id="file-upload"
@@ -182,7 +182,7 @@ export default function EditProjectsItems() {
 							.map((item, index) => (
 								<div
 									key={index}
-									className="flex items-center justify-between p-8 bg-gray-100 my-2 rounded-lg">
+									className="flex items-center justify-between p-8 bg-gray-50 my-2 rounded-lg">
 									<div className="flex flex-1 items-center gap-x-3">
 										<div>
 											<h3 className="text-xl font-medium leading-6 text-gray-900 mr-4">{(item.order ?? 0) + 1}</h3>
@@ -213,7 +213,7 @@ export default function EditProjectsItems() {
 										{index > 0 ? (
 											<button
 												type="button"
-												className="rounded-md bg-gray-100 px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-100"
+												className="rounded-md bg-gray-50 px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
 												onClick={() => {
 													const newItems = [...inputedImages];
 													const itemToMove = newItems[index];
@@ -232,7 +232,7 @@ export default function EditProjectsItems() {
 										{index < inputedImages?.length - 1 ? (
 											<button
 												type="button"
-												className="rounded-md bg-gray-100 px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-100"
+												className="rounded-md bg-gray-50 px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
 												onClick={() => {
 													const newItems = [...inputedImages];
 													const itemToMove = newItems[index];
@@ -250,7 +250,7 @@ export default function EditProjectsItems() {
 
 										<button
 											type="button"
-											className="rounded-md px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-100 bg-red-400/10"
+											className="rounded-md px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 bg-red-400/10"
 											onClick={() => {
 												// remove item from inputedImages
 												const newItems = [...inputedImages];

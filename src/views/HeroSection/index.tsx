@@ -1,5 +1,7 @@
+import { Link } from "react-scroll";
 import HeaderTabs from "../../components/HeaderTabs";
 import { useAcademic } from "../../context/Academic/AcademicContext.hooks";
+import { useFooter } from "../../context/Footer/FooterContext.hooks";
 import { useHero } from "../../context/Hero/HeroContext.hooks";
 import { useProjects } from "../../context/Projects/ProjectsContext.hooks";
 
@@ -7,20 +9,20 @@ export default function HeroSection() {
 	const { data: details } = useHero();
 	const { data: projects } = useProjects();
 	const { data: academic } = useAcademic();
+	const { data: footer } = useFooter();
 
 	const tabs = [];
 
 	if (academic && academic?.items.length > 0) {
 		tabs.push({
 			name: "Formação",
-			href: "#"
+			to: "academic"
 		});
 	}
 
 	if (projects && projects?.items.length > 0) {
 		tabs.push({
 			name: "Projetos",
-			href: "#",
 			submenus: projects?.items.map((project) => ({
 				name: project.title,
 				description: project.description,
@@ -32,11 +34,11 @@ export default function HeroSection() {
 
 	tabs.push({
 		name: "Contato",
-		href: "#"
+		href: footer?.social?.whatsapp ?? "#"
 	});
 
 	return (
-		<div className="bg-gray-100">
+		<div className="bg-gray-50">
 			<HeaderTabs tabs={tabs} />
 			<div className="relative isolate px-6 pt-14 lg:px-8">
 				<div
@@ -60,11 +62,14 @@ export default function HeroSection() {
 								className="rounded-md bg-light-green-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-light-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-light-green-500 transition ease-in-out">
 								Contato
 							</a>
-							<a
-								href="#" // Scroll to the projects section
-								className="text-sm font-semibold leading-6 text-gray-900">
+							<Link
+								to={"projects"}
+								className="transition-colors text-sm font-semibold leading-6 text-gray-900 hover:text-light-green-500 cursor-pointer"
+								smooth={true}
+								duration={500}
+								spy={true}>
 								Ver mais <span aria-hidden="true">→</span>
-							</a>
+							</Link>
 						</div>
 					</div>
 				</div>

@@ -149,7 +149,7 @@ export default function EditAcademicItems() {
 									)}
 									<label
 										htmlFor="file-upload"
-										className="rounded-md bg-gray-100 px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-100">
+										className="rounded-md bg-gray-50 px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
 										<span>{academic?.inputedImage || academic?.image ? "Mudar" : "Adicionar"}</span>
 										<input
 											id="file-upload"

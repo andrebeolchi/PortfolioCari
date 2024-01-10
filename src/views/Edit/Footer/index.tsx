@@ -137,7 +137,7 @@ export default function EditFooterItems() {
 						{groups?.map((group, groupIndex) => (
 							<div
 								key={groupIndex}
-								className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 bg-gray-100 rounded-xl shadow-xl ring-1 ring-gray-400/10 p-4">
+								className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 bg-gray-50 rounded-xl shadow-xl ring-1 ring-gray-400/10 p-4">
 								<div className="sm:col-span-full">
 									<label
 										htmlFor="title"
@@ -148,7 +148,7 @@ export default function EditFooterItems() {
 										<div className="flex-1 flex flex-row mr-2.5">
 											<button
 												type="button"
-												className="rounded-md px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-100 bg-red-400/10 mr-2.5"
+												className="rounded-md px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 bg-red-400/10 mr-2.5"
 												onClick={() => {
 													const groupsCopy = [...groups];
 													groupsCopy.splice(groupIndex, 1);
@@ -200,7 +200,7 @@ export default function EditFooterItems() {
 											key={groupItemIndex}>
 											<button
 												type="button"
-												className="rounded-md px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-100 bg-red-400/10 mr-2.5"
+												className="rounded-md px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 bg-red-400/10 mr-2.5"
 												onClick={() => {
 													const groupsCopy = [...groups];
 													groupsCopy[groupIndex].items.splice(groupItemIndex, 1);

@@ -48,12 +48,12 @@ export default function HeaderTabs({ tabs }: { tabs: FlyoutMenuProps[] }) {
 					))}
 				</div>
 				<div className="hidden lg:flex lg:flex-1 lg:justify-end">
-					{isAuthenticated && (
-						<a
-							href="#"
-							className="text-sm font-semibold leading-6 text-gray-900">
-							Sair <span aria-hidden="true">&rarr;</span>
-						</a>
+					{data?.curriculum && (
+						<span
+							className="transition-colors text-sm font-semibold leading-6 text-gray-900 hover:text-light-green-600 cursor-pointer"
+							onClick={() => window.open(data?.curriculum, "_blank")}>
+							Currículo <span aria-hidden="true">&darr;</span>
+						</span>
 					)}
 				</div>
 			</nav>
@@ -63,7 +63,7 @@ export default function HeaderTabs({ tabs }: { tabs: FlyoutMenuProps[] }) {
 				open={mobileMenuOpen}
 				onClose={setMobileMenuOpen}>
 				<div className="fixed inset-0 z-50" />
-				<Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-gray-100 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+				<Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-gray-200 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
 					<div className="flex items-center justify-between">
 						<a
 							href="#"
@@ -92,7 +92,7 @@ export default function HeaderTabs({ tabs }: { tabs: FlyoutMenuProps[] }) {
 									<a
 										key={item.name}
 										href={item.href}
-										className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-100">
+										className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-200">
 										{item.name}
 									</a>
 								))}
@@ -101,7 +101,7 @@ export default function HeaderTabs({ tabs }: { tabs: FlyoutMenuProps[] }) {
 								<div className="py-6">
 									<a
 										href="#"
-										className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-100">
+										className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-200">
 										Sair
 									</a>
 								</div>
