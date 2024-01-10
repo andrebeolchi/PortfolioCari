@@ -18,6 +18,7 @@ export default function EditHero() {
 		setTitle(details?.title ?? "");
 		setSubtitle(details?.subtitle ?? "");
 		setImage(details?.image ?? "");
+		setCurriculum(details?.curriculum ?? "");
 	}, [details]);
 
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
