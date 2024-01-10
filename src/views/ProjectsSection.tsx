@@ -66,6 +66,7 @@ export default function ProjectsSection() {
 								<Carousel
 									autoplay={true}
 									loop={true}
+									autoplayDelay={2500}
 									className="rounded-xl"
 									placeholder={item?.title}
 									prevArrow={({ handlePrev }) =>
