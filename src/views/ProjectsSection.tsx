@@ -37,7 +37,7 @@ export default function ProjectsSection() {
 								className={`mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2 border-b py-32`}>
 								<div className={`lg:pt-4 ${isEven || "lg:order-last"} ${isLeft}`}>
 									<div className="lg:max-w-lg">
-										<h2 className="text-base font-semibold leading-7 text-lime-600 uppercase tracking-wider">
+										<h2 className="text-base font-semibold leading-7 text-light-green-600 uppercase tracking-wider">
 											{item?.subtitle}
 										</h2>
 										<p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{item?.title}</p>
@@ -49,7 +49,7 @@ export default function ProjectsSection() {
 													className="relative pl-9">
 													<dt className="inline font-semibold text-gray-900">
 														<bullet.icon
-															className="absolute left-1 top-1 h-5 w-5 text-lime-600"
+															className="absolute left-1 top-1 h-5 w-5 text-light-green-600"
 															aria-hidden="true"
 														/>
 														{bullet.title}
@@ -70,7 +70,7 @@ export default function ProjectsSection() {
 											item.images.length > 1 && (
 												<IconButton
 													variant="text"
-													color="lime"
+													color="light-green"
 													placeholder={"previous"}
 													size="lg"
 													onClick={handlePrev}
@@ -96,7 +96,7 @@ export default function ProjectsSection() {
 												<IconButton
 													placeholder={""}
 													variant="text"
-													color="lime"
+													color="light-green"
 													size="lg"
 													onClick={handleNext}
 													className="!absolute top-2/4 !right-4 -translate-y-2/4">
@@ -123,7 +123,7 @@ export default function ProjectsSection() {
 														<span
 															key={i}
 															className={`block h-1 cursor-pointer rounded-2xl transition-all content-[''] ${
-																activeIndex === i ? "w-8 bg-lime-600" : "w-4 bg-gray-400/90"
+																activeIndex === i ? "w-8 bg-light-green-600" : "w-4 bg-gray-400/90"
 															}`}
 															onClick={() => setActiveIndex(i)}
 														/>

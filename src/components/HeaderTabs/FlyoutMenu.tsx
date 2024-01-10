@@ -45,7 +45,7 @@ export default function FlyoutMenu({ menu }: { menu: FlyoutMenuProps }) {
 									<div className="flex gap-x-6 rounded-lg p-4 hover:bg-gray-100">
 										<div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-100 group-hover:bg-gray-100">
 											<InformationCircleIcon
-												className="h-6 w-6 text-gray-600 group-hover:text-lime-500"
+												className="h-6 w-6 text-gray-600 group-hover:text-light-green-500"
 												aria-hidden="true"
 											/>
 										</div>
@@ -67,7 +67,7 @@ export default function FlyoutMenu({ menu }: { menu: FlyoutMenuProps }) {
 										<div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-100 group-hover:bg-gray-100">
 											{item.icon ? (
 												<item.icon
-													className="h-8 w-8 text-gray-600 group-hover:text-lime-500"
+													className="h-8 w-8 text-gray-600 group-hover:text-light-green-500"
 													aria-hidden="true"
 												/>
 											) : (

@@ -39,7 +39,7 @@ export default function Footer() {
 											href={href}
 											about="_blank"
 											color="gray"
-											className="py-1.5 font-normal transition-colors hover:text-lime-600">
+											className="py-1.5 font-normal transition-colors hover:text-light-green-600">
 											{title}
 										</a>
 									</li>
@@ -56,7 +56,7 @@ export default function Footer() {
 						{/* Facebook */}
 						{/* <a
 							href="#"
-							className="opacity-80 hover:opacity-100 hover:text-lime-600 transition ease-in-out">
+							className="opacity-80 hover:opacity-100 hover:text-light-green-600 transition ease-in-out">
 							<svg
 								className="h-5 w-5"
 								fill="currentColor"
@@ -74,7 +74,7 @@ export default function Footer() {
 						{Boolean(footer?.social?.instagram) && (
 							<a
 								href={footer?.social?.instagram}
-								className="opacity-80 hover:opacity-100 hover:text-lime-600 transition ease-in-out">
+								className="opacity-80 hover:opacity-100 hover:text-light-green-600 transition ease-in-out">
 								<svg
 									className="h-5 w-5"
 									fill="currentColor"
@@ -89,7 +89,7 @@ export default function Footer() {
 						{Boolean(footer?.social?.whatsapp) && (
 							<a
 								href={footer?.social?.whatsapp}
-								className="opacity-80 hover:opacity-100 hover:text-lime-600 transition ease-in-out">
+								className="opacity-80 hover:opacity-100 hover:text-light-green-600 transition ease-in-out">
 								<svg
 									className="h-5 w-5"
 									fill="currentColor"
@@ -103,7 +103,7 @@ export default function Footer() {
 						{/* Twitter */}
 						{/* <a
 							href="#"
-							className="opacity-80 hover:opacity-100 hover:text-lime-600 transition ease-in-out">
+							className="opacity-80 hover:opacity-100 hover:text-light-green-600 transition ease-in-out">
 							<svg
 								className="h-5 w-5"
 								fill="currentColor"
@@ -116,7 +116,7 @@ export default function Footer() {
 						{/* Github */}
 						{/* <a
 							href="#"
-							className="opacity-80 hover:opacity-100 hover:text-lime-600 transition ease-in-out">
+							className="opacity-80 hover:opacity-100 hover:text-light-green-600 transition ease-in-out">
 							<svg
 								className="h-5 w-5"
 								fill="currentColor"
