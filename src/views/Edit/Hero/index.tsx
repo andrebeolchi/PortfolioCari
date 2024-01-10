@@ -6,8 +6,6 @@ import { InputImage } from "../../../types/Projects.types";
 export default function EditHero() {
 	const { data: details, updateData } = useHero();
 
-	console.log("details ", details);
-
 	const [title, setTitle] = useState<HeroProps["title"]>("");
 	const [subtitle, setSubtitle] = useState<HeroProps["subtitle"]>("");
 	const [image, setImage] = useState<string>("");

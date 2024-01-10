@@ -28,7 +28,6 @@ class HeroApi {
 				await uploadBytes(storageRef, hero.inputedImage);
 
 				image = await getDownloadURL(storageRef);
-				console.log("image", image);
 			}
 
 			const detailsRef = doc(db, "data", "hero-section");

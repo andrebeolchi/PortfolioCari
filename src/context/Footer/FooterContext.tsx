@@ -47,8 +47,6 @@ export const FooterProvider = ({ children }: FooterProviderProps) => {
 
 	const upsertData = async (data: FooterGroup[]) => {
 		try {
-			console.log("data ", data);
-
 			await FooterApi.upsertFooterLists(data);
 			toast.success("As listas foram atualizadas com sucesso!");
 		} catch (error) {

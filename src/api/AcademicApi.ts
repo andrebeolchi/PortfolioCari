@@ -146,10 +146,8 @@ class AcademicApi {
 		try {
 			const batch = writeBatch(db);
 
-			items.forEach((item, index) => {
+			items.forEach((item) => {
 				const detailsRef = doc(db, "data", "academic-education", "list", item.id);
-
-				console.log("detailsRef", item, index);
 
 				batch.update(detailsRef, { order: item.order });
 			});

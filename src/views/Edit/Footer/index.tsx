@@ -1,6 +1,7 @@
 import { TrashIcon } from "@heroicons/react/20/solid";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import { useFooter } from "../../../context/Footer/FooterContext.hooks";
 import { FooterGroup, FooterSocial } from "../../../types/Footer";
 
@@ -15,14 +16,13 @@ export default function EditFooterItems() {
 
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		console.log("groups ", groups);
 
 		try {
 			await Promise.all([upsertData(groups), updateSocial(social as FooterSocial)]);
 
 			navigate("/edit/footer");
 		} catch (error) {
-			console.log("error ", error);
+			toast.error("Ocorreu um erro ao atualizar os dados!");
 		}
 	};
 
@@ -32,8 +32,6 @@ export default function EditFooterItems() {
 			setSocial(footer.social);
 		}
 	}, [footer, id]);
-
-	console.log("groups ", footer);
 
 	if (!footer) {
 		return null;

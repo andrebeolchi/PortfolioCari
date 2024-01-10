@@ -39,11 +39,6 @@ class ProjectsApi {
 
 			const data = await getDocs(ordered);
 
-			console.log(
-				"projects",
-				data.docs.map((doc) => doc.data())
-			);
-
 			return data.docs.map((doc) => doc.data() as ProjectsItemProps);
 		} catch (error) {
 			if (error instanceof FirebaseError) {
@@ -121,12 +116,8 @@ class ProjectsApi {
 			const images: ImagesProps[] = [];
 
 			if (item.inputedImages && item.inputedImages?.length > 0) {
-				console.log("item.inputedImages", item.inputedImages);
-
 				await Promise.all(
 					item.inputedImages?.map(async (inputedImage) => {
-						console.log("inputedImage", inputedImage);
-
 						if (!inputedImage?.id) {
 							const imageId = uuidv4();
 							const storageRef = ref(storage, `projects/${item.id}/${imageId}`);
@@ -186,10 +177,8 @@ class ProjectsApi {
 		try {
 			const batch = writeBatch(db);
 
-			items.forEach((item, index) => {
+			items.forEach((item) => {
 				const detailsRef = doc(db, "data", "projects", "list", item.id);
-
-				console.log("detailsRef", item, index);
 
 				batch.update(detailsRef, { order: item.order });
 			});

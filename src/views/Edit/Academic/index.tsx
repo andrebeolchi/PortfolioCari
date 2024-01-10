@@ -22,7 +22,6 @@ export default function EditAcademic() {
 				reorderItems(items)
 			]);
 		} catch (error) {
-			console.log("error ", error);
 		}
 	};
 

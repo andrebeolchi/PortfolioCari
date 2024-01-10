@@ -34,7 +34,6 @@ export default function EditAcademicItems() {
 
 			navigate("/edit/academic");
 		} catch (error) {
-			console.log("error ", error);
 		}
 	};
 

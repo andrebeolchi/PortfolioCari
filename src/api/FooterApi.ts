@@ -42,9 +42,6 @@ class FooterApi {
 				whatsapp: data.whatsapp
 			};
 
-      console.log(body);
-      
-
 			await setDoc(socialRef, body);
 		} catch (error) {
 			if (error instanceof FirebaseError) {
@@ -65,8 +62,6 @@ class FooterApi {
 				const ref = doc(db, `data/footer/list/${list.id}`);
 
 				batch.set(ref, list);
-
-				console.log(list);
 			}
 
 			await batch.commit();

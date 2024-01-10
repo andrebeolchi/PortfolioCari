@@ -22,11 +22,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 	useEffect(() => {
 		auth.onAuthStateChanged((user) => {
 			if (user) {
-				console.log("logado");
 				setIsAuthenticated(true);
 				setIsLoading(false);
 			} else {
-				console.log("deslogado");
 				setIsAuthenticated(false);
 				setIsLoading(false);
 			}
