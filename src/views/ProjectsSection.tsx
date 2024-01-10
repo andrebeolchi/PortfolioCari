@@ -138,7 +138,7 @@ export default function ProjectsSection() {
 													key={image?.id}
 													src={image?.url}
 													alt={image?.title}
-													className="w-full sm:w-[32rem] h-[20rem] sm:h-[32rem] object-contain"
+													className="w-full sm:w-[32rem] h-[20rem] object-contain"
 													width={2432}
 													height={1442}
 													onClick={() => setSelectedImage(image)}
@@ -154,15 +154,16 @@ export default function ProjectsSection() {
 			<Dialog
 				placeholder={""}
 				open={Boolean(selectedImage !== null && selectedImage?.url)}
-				handler={handleOpen}>
+				handler={handleOpen}
+				size="xl">
 				<DialogBody
 					placeholder={""}
-					className="flex justify-center">
+					className="flex flex-1 h-[80vh]">
 					<img
 						key={selectedImage?.id}
 						src={selectedImage?.url}
 						alt={selectedImage?.title}
-						className="w-full h-auto sm:h-auto max-h-[80vh] object-contain"
+						className="object-contain flex flex-1"
 					/>
 				</DialogBody>
 			</Dialog>
