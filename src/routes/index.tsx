@@ -7,6 +7,7 @@ import { AcademicProvider } from "../context/AcademicContext";
 import { ProjectsProvider } from "../context/ProjectsContext";
 import EditAcademic from "../views/Edit/Academic";
 import EditAcademicItems from "../views/Edit/AcademicItems";
+import EditFooterItems from "../views/Edit/Footer";
 import EditHero from "../views/Edit/Hero";
 import EditProjects from "../views/Edit/Projects";
 import EditProjectsItems from "../views/Edit/ProjectsItems";
@@ -84,6 +85,28 @@ export default function AppRoutes() {
 										<ProtectedRoute>
 											<EditPage>
 												<EditProjectsItems />
+											</EditPage>
+										</ProtectedRoute>
+									}
+								/>
+
+								<Route
+									path="/edit/footer"
+									element={
+										<ProtectedRoute>
+											<EditPage>
+												<EditFooterItems />
+											</EditPage>
+										</ProtectedRoute>
+									}
+								/>
+
+								<Route
+									path="/edit/footer/:id"
+									element={
+										<ProtectedRoute>
+											<EditPage>
+												<EditFooterItems />
 											</EditPage>
 										</ProtectedRoute>
 									}

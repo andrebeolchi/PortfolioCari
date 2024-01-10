@@ -64,7 +64,11 @@ export default function EditPage({ children }: { children: React.ReactNode }) {
 								icon: FolderPlusIcon
 							}
 						]
-					}
+					},
+          {
+            name: "Rodapé",
+            href: "/edit/footer"
+          }
 				]}
 			/>
 
