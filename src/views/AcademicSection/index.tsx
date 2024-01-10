@@ -8,7 +8,7 @@ export default function AcademicSection() {
 	}
 
 	return (
-		<div className="bg-white py-24 sm:py-32">
+		<div className="bg-gray-100 py-24 sm:py-32">
 			<div className="mx-auto max-w-7xl px-6 lg:px-8">
 				<div className="mx-auto max-w-2xl lg:mx-0">
 					<h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{data?.title}</h2>
@@ -20,7 +20,7 @@ export default function AcademicSection() {
 							key={post.id}
 							className="flex max-w-xl flex-col items-start justify-between">
 							{post.image && (
-								<div className="mb-8 bg-gray-50 p-4 rounded-xl w-full border-gray-900/10  border shadow-sm">
+								<div className="mb-8 bg-gray-100 p-4 rounded-xl w-full border-gray-900/10  border shadow-sm">
 									<img
 										src={post.image}
 										alt=""
@@ -30,7 +30,7 @@ export default function AcademicSection() {
 							)}
 							<div className="flex items-center gap-x-4 text-xs">
 								<p className="text-gray-500">{post.date}</p>
-								<p className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600">
+								<p className="relative z-10 rounded-full bg-gray-100 px-3 py-1.5 font-medium text-gray-600">
 									{post.category}
 								</p>
 							</div>

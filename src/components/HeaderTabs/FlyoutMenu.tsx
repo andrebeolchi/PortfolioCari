@@ -39,11 +39,11 @@ export default function FlyoutMenu({ menu }: { menu: FlyoutMenuProps }) {
 					leaveFrom="opacity-100 translate-y-0"
 					leaveTo="opacity-0 translate-y-1">
 					<Popover.Panel className="absolute left-1/2 z-10 mt-5 flex w-screen max-w-max -translate-x-1/2 px-4">
-						<div className="w-screen max-w-md flex-auto overflow-hidden rounded-3xl bg-white text-sm leading-6 shadow-lg ring-1 ring-gray-900/5">
+						<div className="w-screen max-w-md flex-auto overflow-hidden rounded-3xl bg-gray-100 text-sm leading-6 shadow-lg ring-1 ring-gray-900/5">
 							<div className="p-4">
 								{submenus?.length === 0 && (
-									<div className="flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
-										<div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
+									<div className="flex gap-x-6 rounded-lg p-4 hover:bg-gray-100">
+										<div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-100 group-hover:bg-gray-100">
 											<InformationCircleIcon
 												className="h-6 w-6 text-gray-600 group-hover:text-lime-500"
 												aria-hidden="true"
@@ -63,8 +63,8 @@ export default function FlyoutMenu({ menu }: { menu: FlyoutMenuProps }) {
 								{submenus?.map((item) => (
 									<div
 										key={item.name}
-										className="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
-										<div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
+										className="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-100">
+										<div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-100 group-hover:bg-gray-100">
 											{item.icon ? (
 												<item.icon
 													className="h-8 w-8 text-gray-600 group-hover:text-lime-500"
@@ -92,7 +92,7 @@ export default function FlyoutMenu({ menu }: { menu: FlyoutMenuProps }) {
 									</div>
 								))}
 							</div>
-							<div className="grid grid-cols-2 divide-x divide-gray-900/5 bg-gray-50">
+							<div className="grid grid-cols-2 divide-x divide-gray-900/5 bg-gray-100">
 								{callsToAction?.map((item) => (
 									<NavLink
 										key={item.name}

@@ -60,7 +60,7 @@ export default function ProjectsSection() {
 										</dl>
 									</div>
 								</div>
-								<div className="flex w-full sm:w-[32rem] rounded-xl md:-ml-4 lg:-ml-0 place-self-center bg-gray-50 p-4 border-gray-900/10 border shadow-sm">
+								<div className="flex w-full sm:w-[32rem] rounded-xl md:-ml-4 lg:-ml-0 place-self-center bg-gray-100 p-4 border-gray-900/10 border shadow-sm">
 									<Carousel
 										autoplay={true}
 										loop={true}

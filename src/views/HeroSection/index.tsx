@@ -36,7 +36,7 @@ export default function HeroSection() {
 	});
 
 	return (
-		<div className="bg-white">
+		<div className="bg-gray-100">
 			<HeaderTabs tabs={tabs} />
 			<div className="relative isolate px-6 pt-14 lg:px-8">
 				<div
