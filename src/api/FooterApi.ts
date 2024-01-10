@@ -1,6 +1,6 @@
-import { collection, doc, getDocs, writeBatch } from "@firebase/firestore";
+import { collection, doc, getDoc, getDocs, setDoc, writeBatch } from "@firebase/firestore";
 import { v4 as uuidv4 } from "uuid";
-import { FooterGroup } from "../types/Footer";
+import { FooterGroup, FooterSocial } from "../types/Footer";
 import { FirebaseError, db } from "../utils/firebase";
 
 class FooterApi {
@@ -11,6 +11,41 @@ class FooterApi {
 			const data = await getDocs(ref);
 
 			return data.docs.map((doc) => doc.data() as FooterGroup);
+		} catch (error) {
+			if (error instanceof FirebaseError) {
+				throw new Error(error.message);
+			}
+		}
+	}
+
+	async getFooterSocial(): Promise<FooterSocial | void> {
+		try {
+			// data/footer
+			const socialRef = doc(db, "data/footer");
+
+			const docSnap = await getDoc(socialRef);
+
+			return docSnap.data() as FooterSocial;
+		} catch (error) {
+			if (error instanceof FirebaseError) {
+				throw new Error(error.message);
+			}
+		}
+	}
+
+	async updateFooterSocial(data: FooterSocial): Promise<void> {
+		try {
+			const socialRef = doc(db, "data/footer");
+
+			const body = {
+				instagram: data.instagram,
+				whatsapp: data.whatsapp
+			};
+
+      console.log(body);
+      
+
+			await setDoc(socialRef, body);
 		} catch (error) {
 			if (error instanceof FirebaseError) {
 				throw new Error(error.message);

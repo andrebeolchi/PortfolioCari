@@ -4,6 +4,11 @@ export interface FooterGroup {
 	id?: string;
 }
 
+export interface FooterSocial {
+	instagram: string;
+	whatsapp: string;
+}
+
 export interface FooterItem {
 	title: string;
 	href: string;

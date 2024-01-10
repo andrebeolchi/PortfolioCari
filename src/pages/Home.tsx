@@ -1,5 +1,6 @@
 import Footer from "../components/Footer";
 import AcademicSection from "../views/AcademicSection";
+import ContactSection from "../views/ContactSection";
 import HeroSection from "../views/HeroSection";
 import ProjectsSection from "../views/ProjectsSection";
 
@@ -9,6 +10,7 @@ export default function Home() {
 			<HeroSection />
 			<AcademicSection />
 			<ProjectsSection />
+			{/* <ContactSection /> */}
 			<Footer />
 		</div>
 	);

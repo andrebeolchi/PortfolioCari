@@ -1,12 +1,18 @@
 import { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import FooterApi from "../../api/FooterApi";
-import { FooterGroup } from "../../types/Footer";
+import { FooterGroup, FooterSocial } from "../../types/Footer";
 
 interface FooterContextProps {
-	data?: FooterGroup[];
+	data?: FooterData;
 	isLoading: boolean;
 	upsertData: (data: FooterGroup[]) => Promise<void>;
+	updateSocial: (data: FooterSocial) => Promise<void>;
+}
+
+interface FooterData {
+	list: FooterGroup[];
+	social: FooterSocial;
 }
 
 interface FooterProviderProps {
@@ -14,21 +20,28 @@ interface FooterProviderProps {
 }
 
 export const FooterContext = createContext<FooterContextProps>({
-	data: [],
+	data: undefined,
 	upsertData: async () => {},
+	updateSocial: async () => {},
 	isLoading: true
 });
 
 export const FooterProvider = ({ children }: FooterProviderProps) => {
-	const [data, setData] = useState<FooterGroup[]>();
+	const [data, setData] = useState<FooterData>();
 	const [isLoading, setIsLoading] = useState<boolean>(true);
 
 	const getData = async () => {
 		setIsLoading(true);
 
-		const list = await FooterApi.getFooterLists();
+		const [list, social] = await Promise.all([FooterApi.getFooterLists(), FooterApi.getFooterSocial()]);
 
-		setData(list ?? []);
+		if (list) {
+			setData({
+				list,
+				social: social as FooterSocial
+			});
+		}
+
 		setIsLoading(false);
 	};
 
@@ -37,7 +50,16 @@ export const FooterProvider = ({ children }: FooterProviderProps) => {
 			console.log("data ", data);
 
 			await FooterApi.upsertFooterLists(data);
-			toast.success("Dados atualizados com sucesso!");
+			toast.success("As listas foram atualizadas com sucesso!");
+		} catch (error) {
+			toast.error("Ocorreu um erro ao atualizar os dados!");
+		}
+	};
+
+	const updateSocial = async (data: FooterSocial) => {
+		try {
+			await FooterApi.updateFooterSocial(data);
+			toast.success("Suas mídias sociais foram atualizadas com sucesso!");
 		} catch (error) {
 			toast.error("Ocorreu um erro ao atualizar os dados!");
 		}
@@ -52,7 +74,8 @@ export const FooterProvider = ({ children }: FooterProviderProps) => {
 			value={{
 				data,
 				isLoading,
-				upsertData
+				upsertData,
+				updateSocial
 			}}>
 			{children}
 		</FooterContext.Provider>
