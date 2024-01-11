@@ -9,7 +9,7 @@ export default function Home() {
 			<HeroSection />
 			<AcademicSection />
 			<ProjectsSection />
-			{/* <ContactSection /> */}
+			{/* <ContactSection /> */}  
 			<Footer />
 		</div>
 	);

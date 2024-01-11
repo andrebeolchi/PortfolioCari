@@ -23,6 +23,7 @@ export default function HeroSection() {
 	if (projects && projects?.items.length > 0) {
 		tabs.push({
 			name: "Projetos",
+			to: "projects",
 			submenus: projects?.items.map((project) => ({
 				name: project.title,
 				description: project.description,
@@ -38,7 +39,9 @@ export default function HeroSection() {
 	});
 
 	return (
-		<div className="bg-gray-50">
+		<div
+			className="bg-gray-50"
+			id="hero">
 			<HeaderTabs tabs={tabs} />
 			<div className="relative isolate px-6 pt-14 lg:px-8">
 				<div
