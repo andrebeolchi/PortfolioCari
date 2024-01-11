@@ -95,16 +95,24 @@ export default function FlyoutMenu({ menu }: { menu: FlyoutMenuProps }) {
 											)}
 										</div>
 										<div>
-											<Popover.Button
-												as={Link}
-												to={item.to || "#"}
-												className="font-semibold text-gray-900 z-20 cursor-pointer"
-												smooth={true}
-												duration={500}
-												spy={true}>
-												{item.name}
-												<span className="absolute inset-0" />
-											</Popover.Button>
+											{item.to ? (
+												<Link
+													to={item.to}
+													className="font-semibold text-gray-900 z-20 cursor-pointer"
+													smooth={true}
+													duration={500}
+													spy={true}>
+													{item.name}
+													<span className="absolute inset-0" />
+												</Link>
+											) : (
+												<NavLink
+													to={item.href ?? "/"}
+													className="font-semibold text-gray-900 z-20 cursor-pointer">
+													{item.name}
+													<span className="absolute inset-0" />
+												</NavLink>
+											)}
 											<p className="text-gray-600 line-clamp-1">{item.description}</p>
 										</div>
 									</div>
