@@ -35,6 +35,7 @@ export default function ProjectsSection() {
 
 					return (
 						<div
+							key={item?.id}
 							className={`mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2 border-b py-32`}
 							id={item?.id}>
 							<div className={`lg:pt-4 ${isEven || "lg:order-last"} ${isLeft}`}>
@@ -45,9 +46,9 @@ export default function ProjectsSection() {
 									<p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{item?.title}</p>
 									<p className="mt-6 text-lg leading-8 text-gray-600">{item?.description}</p>
 									<dl className="mt-10 max-w-xl space-y-8 text-base leading-7 text-gray-600 lg:max-w-none">
-										{item?.bullets?.map((bullet) => (
+										{item?.bullets?.map((bullet, index) => (
 											<div
-												key={bullet.title}
+												key={index}
 												className="relative pl-9">
 												<dt className="inline font-semibold text-gray-900">
 													<bullet.icon

@@ -34,9 +34,9 @@ export default function Footer() {
 									{title}
 								</span>
 								<div className="mt-3">
-									{items.map(({ href, title }) => (
+									{items.map(({ href, title }, index) => (
 										<li
-											key={href}
+											key={index}
 											className="mt-1.5">
 											<span
 												onClick={() => href.length > 3 && window.open(href, "_blank")}
